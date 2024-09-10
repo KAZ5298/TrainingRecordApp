@@ -1,0 +1,19 @@
+package com.example.training_app.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.example.training_app.model.User;
+import com.example.training_app.repository.UserMapper;
+import com.example.training_app.service.UserService;
+
+public class UserServiceImpl implements UserService {
+
+	@Autowired
+	private UserMapper mapper;
+	
+	@Override
+	public void registerUser(User user) {
+		mapper.registerUser(user);
+	}
+
+}
