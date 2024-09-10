@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mapper.UserMapper">
+
+    <!-- ユーザー情報の挿入 -->
+    <insert id="registerUser" parameterType="com.example.model.User" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO users
+		(
+			name,
+			email,
+			password,
+			family_name,
+			first_name,
+			age,
+			gender,
+			weight,
+			height,
+			profile_image
+		)
+        VALUES
+        (
+        	#{name},
+			#{email},
+			#{password},
+			#{familyName},
+			#{firstName},
+			#{age},
+			#{gender},
+			#{weight},
+			#{height},
+			#{profileImage}
+		)
+    </insert>
+    
+</mapper>
