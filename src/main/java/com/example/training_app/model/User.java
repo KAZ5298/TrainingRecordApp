@@ -39,6 +39,7 @@ public class User {
     private double weight;
     private double height;
     private int gender;
+    private String profileImage;
 
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();

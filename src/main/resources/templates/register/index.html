@@ -11,7 +11,7 @@
 <div class="container">
 	<img src="/images/logo.jpg" alt="Logo" style="width: 100px; height: auto;">
 	<h2>ユーザー登録</h2>
-	<form id="userForm">
+	<form id="userForm" th:action="@{/register}" method="post">
 		<div class="mb-3">
 			<label for="name">ユーザー名</label>
 			<input type="text" class="form-control" id="name" name="name">
@@ -36,15 +36,14 @@
 			<label for="first_name">名</label>
 			<input type="text" class="form-control" id="first_name" name="first_name">
 		</div>
-		<div class="mb-3">
-			<label for="age">年齢</label>
-			<select class="form-control" id="age" name="age">
-				<option value="">選択してください</option>
-				<th:block th:each="i : ${#numbers.sequence(1, 99)}">
-					<option th:value="${i}" th:text="${i}"></option>
-				</th:block>
-			</select>
-		</div>
+		<div class="form-group">
+            <label for="birthdate">生年月日</label>
+            <input type="date" class="form-control" id="birthdate" name="birthdate" required>
+        </div>
+		<div class="form-group">
+            <label for="age">年齢</label>
+            <input type="text" class="form-control" id="age" name="age" readonly>
+        </div>
 		<div class="mb-3">
 			<label for="gender">性別</label>
 			<select class="form-control" id="gender" name="gender">
@@ -75,14 +74,15 @@
 			<div class="modal-body">
 				<p><strong>ユーザー名:</strong> <span id="modalName"></span></p>
 				<p><strong>メールアドレス:</strong> <span id="modalEmail"></span></p>
-				<p><strong>パスワード:</strong> **********</p>
+				<p><strong>パスワード:</strong>セキュリティの観点から非表示にしています</p>
 				<p><strong>姓:</strong> <span id="modalFamilyName"></span></p>
 				<p><strong>名:</strong> <span id="modalFirstName"></span></p>
 				<p><strong>年齢:</strong> <span id="modalAge"></span></p>
 				<p><strong>性別:</strong> <span id="modalGender"></span></p>
 				<div>
 					<strong>プロフィール画像:</strong>
-					<img id="modalProfileImage" src="" alt="プロフィール画像" style="max-width: 100%; height: auto;">
+					<img id="modalProfileImage" src="" alt="プロフィール画像" style="max-width: 200px; height: auto; display: none;">
+					<p id="modalProfileImageText"></p>
 				</div>
 			</div>
 			<div class="modal-footer">
@@ -97,6 +97,19 @@
 <script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.min.js}" defer></script>
 
 <script>
+	
+	// 生年月日から年齢を計算
+	document.getElementById('birthdate').addEventListener('change', function() {
+        const birthdate = new Date(this.value);
+        const today = new Date();
+        const age = today.getFullYear() - birthdate.getFullYear();
+        const monthDifference = today.getMonth() - birthdate.getMonth();
+        if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthdate.getDate())) {
+            age--;
+        }
+        document.getElementById('age').value = age;
+    });
+
 	document.getElementById('profile_image').addEventListener('change', function(event) {
 		const file = event.target.files[0];
 		const reader = new FileReader();
@@ -108,6 +121,12 @@
 		
 		if (file) {
 			reader.readAsDataURL(file);
+		} else {
+			// 画像が選択されていない場合
+			document.getElementById('modalProfileImage').src = "";
+			document.getElementById('modalProfileImage').alt = "画像選択なし";
+			document.getElementById('modalProfileImage').style.display = "none";
+			document.getElementById('modalProfileImageText').textContent = "画像選択なし";
 		}
 	});
 	
@@ -119,7 +138,41 @@
 		document.getElementById("modalFamilyName").textContent = document.getElementById("family_name").value;
 		document.getElementById("modalFirstName").textContent = document.getElementById("first_name").value;
 		document.getElementById("modalAge").textContent = document.getElementById("age").value;
-		document.getElementById("modalGender").textContent = document.getElementById("gender").value;
+		
+		// 性別
+		const genderValue = document.getElementById("gender").value;
+		let genderText = "";
+		
+		switch (genderValue) {
+			case "1":
+				genderText = "男性";
+				break;
+			case "2":
+				genderText = "女性";
+				break;
+			case "3":
+				genderText = "その他";
+				break;
+			case "4":
+				genderText = "不明";
+				break;
+			default:
+				genderText = "";
+				break;
+		}
+		
+		document.getElementById("modalGender").textContent = genderText;
+		
+		// プロフィール画像
+		const profileImage = document.getElementById('profile_image').files[0];
+		if (profileImage) {
+			document.getElementById('modalProfileImage').src = URL.createObjectURL(profileImage);
+			document.getElementById('modalProfileImage').style.display = "block";
+			document.getElementById('modalProfileImageText').textContent = "";
+		} else {
+			document.getElementById('modalProfileImage').style.display = "none";
+			document.getElementById('modalProfileImageText').textContent = "画像選択なし";
+		}
 		
 		// モーダルを表示
 		var confirmationModal = new bootstrap.Modal(document.getElementById("confirmationModal"));
