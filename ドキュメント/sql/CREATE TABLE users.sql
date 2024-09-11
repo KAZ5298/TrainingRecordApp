@@ -8,7 +8,7 @@ CREATE TABLE users (
     age INT NOT NULL COMMENT '年齢',
     weight DECIMAL(5, 2) NOT NULL COMMENT '体重',
     height DECIMAL(5, 2) NOT NULL COMMENT '身長',
-    gender INT COMMENT '性別: 1=男性, 2=女性, 3=その他, 4=不明',
+    gender INT NOT NULL COMMENT '性別: 1=男性, 2=女性, 3=その他, 4=不明',
     profile_image TEXT COMMENT 'プロフィール画像',
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '登録日時',
     updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日時'

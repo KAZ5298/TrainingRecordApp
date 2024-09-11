@@ -35,10 +35,18 @@ public class User {
     @Column(nullable = false)
     private String firstName;
 
+    @Column(nullable = false)
     private int age;
+    
+    @Column(nullable = false)
     private double weight;
+    
+    @Column(nullable = false)
     private double height;
+    
+    @Column(nullable = false)
     private int gender;
+    
     private String profileImage;
 
     @Column(nullable = false)
