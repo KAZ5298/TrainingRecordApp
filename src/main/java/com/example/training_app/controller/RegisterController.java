@@ -58,8 +58,6 @@ public class RegisterController {
 	        
 	        model.addAttribute("genderMap", applicationService.getGenderMap());
 	        
-//	        logger.error("フォームエラー: {}", bindingResult.getAllErrors());
-	        
 	        return "register/index";
 	    }
 	    

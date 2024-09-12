@@ -93,12 +93,20 @@
 		<dependency>
 		    <groupId>org.slf4j</groupId>
 		    <artifactId>slf4j-api</artifactId>
-		    <version>2.0.0</version> <!-- 最新の安定版バージョンを指定してください -->
 		</dependency>
 		<dependency>
 		    <groupId>ch.qos.logback</groupId>
 		    <artifactId>logback-classic</artifactId>
-		    <version>1.4.0</version> <!-- 最新の安定版バージョンを指定してください -->
+		</dependency>
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-core</artifactId>
+		    <version>6.6.0.Final</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.hibernate.orm</groupId>
+		    <artifactId>hibernate-community-dialects</artifactId>
+<!--		    <version>6.5.2.Final</version>-->
 		</dependency>
 	</dependencies>
 
