@@ -52,9 +52,13 @@ public class RegisterController {
 	        
 	        model.addAttribute("errorMessages", errorMessages);
 	        
+	        if (!userRegisterForm.getPassword().equals(userRegisterForm.getPasswordConfirm())) {
+	            bindingResult.rejectValue("passwordConfirm", "error.passwordConfirm", "パスワードが一致しません");
+	        }
+	        
 	        model.addAttribute("genderMap", applicationService.getGenderMap());
 	        
-	        logger.error("フォームエラー: {}", bindingResult.getAllErrors());
+//	        logger.error("フォームエラー: {}", bindingResult.getAllErrors());
 	        
 	        return "register/index";
 	    }

@@ -11,11 +11,6 @@
 <div class="container">
 	<img src="/images/logo.jpg" alt="Logo" style="width: 100px; height: auto;">
 	<h2>ユーザー登録</h2>
-	<div th:if="${errorMessages != null}">
-	    <ul>
-	        <li th:each="error : ${errorMessages}" th:text="${error}"></li>
-	    </ul>
-	</div>
 	<form id="userForm" th:action="@{/register}" method="post" th:object="${userRegisterForm}">
 		<div class="mb-3">
 			<label for="name">ユーザー名</label>
