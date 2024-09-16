@@ -11,18 +11,23 @@ import com.example.training_app.repository.UserRepository;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
-	
-	private final UserRepository userRepository;
 
-	public CustomUserDetailsService(UserRepository userRepository) {
-		this.userRepository = userRepository;
-	}
-	
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = userRepository.findByName(username)  // データベースからユーザーを検索
-				.orElseThrow(() -> new UsernameNotFoundException("ユーザーが見つかりません"));
-		
-		return new LoginUserDetails(user);
-	}
+//    private static final Logger logger = LoggerFactory.getLogger(CustomUserDetailsService.class);
+    
+    private final UserRepository userRepository;
+
+    public CustomUserDetailsService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+    
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        
+        User user = userRepository.findByName(username)
+                .orElseThrow(() -> {
+                    return new UsernameNotFoundException("ユーザーが見つかりません");
+                });
+
+        return new LoginUserDetails(user);
+    }
 }
