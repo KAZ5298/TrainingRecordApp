@@ -1,190 +1,190 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}">
-	<title>ユーザー登録</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}">
+    <title>ユーザー登録</title>
 </head>
 <body>
 <div class="container">
-	<img src="/images/logo.jpg" alt="Logo" style="width: 100px; height: auto;">
-	<h2>ユーザー登録</h2>
-	<form id="userForm" th:action="@{/register}" method="post" th:object="${userRegisterForm}">
-		<div class="mb-3">
-			<label for="name">ユーザー名</label>
-			<input type="text" class="form-control" id="name" th:field="*{name}">
-			<div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
-		</div>
-		<div class="mb-3">
-			<label for="email">メールアドレス</label>
-			<input type="email" class="form-control" id="email" th:field="*{email}">
-			<div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
-		</div>
-		<div class="mb-3">
-			<label for="password">パスワード</label>
-			<input type="password" class="form-control" id="password" th:field="*{password}">
-			<div class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-		</div>
-		<div class="mb-3">
-			<label for="password_confirm">パスワードの確認</label>
-			<input type="password" class="form-control" id="password_confirm" th:field="*{passwordConfirm}">
-			<div class="text-danger" th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}"></div>
-		</div>
-		<div class="mb-3">
-			<label for="family_name">姓</label>
-			<input type="text" class="form-control" id="family_name" th:field="*{familyName}">
-			<div class="text-danger" th:if="${#fields.hasErrors('familyName')}" th:errors="*{familyName}"></div>
-		</div>
-		<div class="mb-3">
-			<label for="first_name">名</label>
-			<input type="text" class="form-control" id="first_name" th:field="*{firstName}">
-			<div class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
-		</div>
-		<div class="mb-3">
-			<label for="birthdate">生年月日</label>
-			<input type="date" class="form-control" id="birthdate" th:field="*{birthdate}">
-			<div class="text-danger" th:if="${#fields.hasErrors('birthdate')}" th:errors="*{birthdate}"></div>
-		</div>
-		<div class="mb-3">
-			<label for="age">年齢</label>
-			<input type="text" class="form-control" id="age" name="age" th:field="*{age}" readonly>
-			<div class="text-danger" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
-		</div>
-		<div class="mb-3">
-			<label for="weight">体重 (kg)</label>
-			<input type="number" step="0.1" class="form-control" id="weight" th:field="*{weight}">
-			<div class="text-danger" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
-		</div>
-		<div class="mb-3">
-			<label for="height">身長 (cm)</label>
-			<input type="number" step="0.1" class="form-control" id="height" th:field="*{height}">
-			<div class="text-danger" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
-		</div>
-		<div class="mb-3">
-			<label for="gender">性別</label>
-			<select class="form-control" id="gender" th:field="*{gender}">
-				<option value="">選択してください</option>
-				<th:block th:each="gender : ${genderMap}">
-					<option th:value="${gender.key}" th:text="${gender.value}"></option>
-				</th:block>
-			</select>
-			<div class="text-danger" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></div>
-		</div>
-		<div class="mb-3">
-			<label for="profile_image">プロフィール画像</label>
-			<input type="file" class="form-control" id="profile_image" th:field="*{profileImage}">
-		</div>
-		<!-- 確認ボタンにクリックイベントを追加 -->
-		<button type="button" class="btn btn-primary" onclick="validateForm()">確認</button>
-		<a th:href="@{/login}" class="btn btn-secondary">戻る</a>
-	</form>
+    <img src="/images/logo.jpg" alt="Logo" style="width: 100px; height: auto;">
+    <h2>ユーザー登録</h2>
+    <form id="userForm" th:action="@{/register}" method="post" th:object="${userRegisterForm}">
+        <div class="mb-3">
+            <label for="name">ユーザー名</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}">
+            <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="email">メールアドレス</label>
+            <input type="email" class="form-control" id="email" th:field="*{email}">
+            <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="password">パスワード</label>
+            <input type="password" class="form-control" id="password" th:field="*{password}">
+            <div class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="password_confirm">パスワードの確認</label>
+            <input type="password" class="form-control" id="password_confirm" th:field="*{passwordConfirm}">
+            <div class="text-danger" th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="family_name">姓</label>
+            <input type="text" class="form-control" id="family_name" th:field="*{familyName}">
+            <div class="text-danger" th:if="${#fields.hasErrors('familyName')}" th:errors="*{familyName}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="first_name">名</label>
+            <input type="text" class="form-control" id="first_name" th:field="*{firstName}">
+            <div class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="birthdate">生年月日</label>
+            <input type="date" class="form-control" id="birthdate" th:field="*{birthdate}">
+            <div class="text-danger" th:if="${#fields.hasErrors('birthdate')}" th:errors="*{birthdate}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="age">年齢</label>
+            <input type="text" class="form-control" id="age" name="age" th:field="*{age}" readonly>
+            <div class="text-danger" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="weight">体重 (kg)</label>
+            <input type="number" step="0.1" class="form-control" id="weight" th:field="*{weight}">
+            <div class="text-danger" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="height">身長 (cm)</label>
+            <input type="number" step="0.1" class="form-control" id="height" th:field="*{height}">
+            <div class="text-danger" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="gender">性別</label>
+            <select class="form-control" id="gender" th:field="*{gender}">
+                <option value="">選択してください</option>
+                <th:block th:each="gender : ${genderMap}">
+                    <option th:value="${gender.key}" th:text="${gender.value}"></option>
+                </th:block>
+            </select>
+            <div class="text-danger" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="profile_image">プロフィール画像</label>
+            <input type="file" class="form-control" id="profile_image" th:field="*{profileImage}">
+        </div>
+        <!-- 確認ボタンにクリックイベントを追加 -->
+        <button type="button" class="btn btn-primary" onclick="validateForm()">確認</button>
+        <a th:href="@{/login}" class="btn btn-secondary">戻る</a>
+    </form>
 </div>
 
 <!-- モーダルウィンドウのHTML -->
 <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">入力内容確認</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				<p><strong>ユーザー名:</strong> <span id="modalName"></span></p>
-				<p><strong>メールアドレス:</strong> <span id="modalEmail"></span></p>
-				<p><strong>パスワード:</strong>セキュリティの観点から非表示にしています</p>
-				<p><strong>姓:</strong> <span id="modalFamilyName"></span></p>
-				<p><strong>名:</strong> <span id="modalFirstName"></span></p>
-				<p><strong>年齢:</strong> <span id="modalAge"></span> 歳</p>
-				<p><strong>体重:</strong> <span id="modalWeight"></span> kg</p>
-				<p><strong>身長:</strong> <span id="modalHeight"></span> cm</p>
-				<p><strong>性別:</strong> <span id="modalGender"></span></p>
-				<div>
-					<strong>プロフィール画像:</strong>
-					<img id="modalProfileImage" src="" alt="プロフィール画像" style="max-width: 200px; height: auto; display: none;">
-					<p id="modalProfileImageText"></p>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">戻る</button>
-				<button type="button" class="btn btn-primary" onclick="submitForm()">登録</button>
-			</div>
-		</div>
-	</div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">入力内容確認</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>ユーザー名:</strong> <span id="modalName"></span></p>
+                <p><strong>メールアドレス:</strong> <span id="modalEmail"></span></p>
+                <p><strong>パスワード:</strong>セキュリティの観点から非表示にしています</p>
+                <p><strong>姓:</strong> <span id="modalFamilyName"></span></p>
+                <p><strong>名:</strong> <span id="modalFirstName"></span></p>
+                <p><strong>年齢:</strong> <span id="modalAge"></span> 歳</p>
+                <p><strong>体重:</strong> <span id="modalWeight"></span> kg</p>
+                <p><strong>身長:</strong> <span id="modalHeight"></span> cm</p>
+                <p><strong>性別:</strong> <span id="modalGender"></span></p>
+                <div>
+                    <strong>プロフィール画像:</strong>
+                    <img id="modalProfileImage" src="" alt="プロフィール画像" style="max-width: 200px; height: auto; display: none;">
+                    <p id="modalProfileImageText"></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">戻る</button>
+                <button type="button" class="btn btn-primary" onclick="submitForm()">登録</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script th:src="@{/webjars/popper.js/2.11.7/umd/popper.min.js}" defer></script>
 <script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.min.js}" defer></script>
 
 <script>
-	// 生年月日から年齢を計算
-	document.getElementById('birthdate').addEventListener('change', function() {
-		const birthdateValue = this.value;
-		if (birthdateValue) {
-			const birthdate = new Date(birthdateValue);
-			const today = new Date();
-			let age = today.getFullYear() - birthdate.getFullYear();
-			const monthDifference = today.getMonth() - birthdate.getMonth();
-			if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthdate.getDate())) {
-				age--;
-			}
-			document.getElementById('age').value = age;
-		} else {
-			document.getElementById('age').value = "";
-		}
-	});
-
-	// プロフィール画像のプレビュー表示
-	document.getElementById('profile_image').addEventListener('change', function(event) {
-		const file = event.target.files[0];
-		const reader = new FileReader();
-
-		reader.onload = function(e) {
-			const image = document.getElementById('modalProfileImage');
-			image.src = e.target.result;
-			image.style.display = 'block'; // プレビューを表示
-			document.getElementById('modalProfileImageText').textContent = "";
-		};
-
-		if (file) {
-			reader.readAsDataURL(file);
-		} else {
-			document.getElementById('modalProfileImage').src = "";
-			document.getElementById('modalProfileImage').style.display = "none";
-			document.getElementById('modalProfileImageText').textContent = "画像選択なし";
-		}
-	});
-
-	// 入力内容をモーダルに表示する
-	function showModal() {
-		document.getElementById("modalName").textContent = document.getElementById("name").value;
-		document.getElementById("modalEmail").textContent = document.getElementById("email").value;
-		document.getElementById("modalFamilyName").textContent = document.getElementById("family_name").value;
-		document.getElementById("modalFirstName").textContent = document.getElementById("first_name").value;
-		document.getElementById("modalAge").textContent = document.getElementById("age").value;
-		document.getElementById("modalWeight").textContent = document.getElementById("weight").value;
-		document.getElementById("modalHeight").textContent = document.getElementById("height").value;
-		const genderText = document.getElementById("gender").options[document.getElementById("gender").selectedIndex].text;
-		document.getElementById("modalGender").textContent = genderText;
-	}
-
-	// フォームのバリデーションとモーダル表示
-	function validateForm() {
-		const form = document.getElementById("userForm");
-		if (form.checkValidity()) {
-			showModal();  // モーダルにデータを反映
-			const modal = new bootstrap.Modal(document.getElementById('confirmationModal'));
-			modal.show();  // モーダルを表示
-		} else {
-			form.reportValidity();  // バリデーションエラーを表示
-		}
-	}
-
-	// フォームをサブミットする
-	function submitForm() {
-		document.getElementById("userForm").submit();
-	}
+    // 生年月日から年齢を計算
+    document.getElementById('birthdate').addEventListener('change', function() {
+        const birthdateValue = this.value;
+        if (birthdateValue) {
+            const birthdate = new Date(birthdateValue);
+            const today = new Date();
+            let age = today.getFullYear() - birthdate.getFullYear();
+            const monthDifference = today.getMonth() - birthdate.getMonth();
+            if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthdate.getDate())) {
+                age--;
+            }
+            document.getElementById('age').value = age;
+        } else {
+            document.getElementById('age').value = "";
+        }
+    });
+    
+    // プロフィール画像のプレビュー表示
+    document.getElementById('profile_image').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            const image = document.getElementById('modalProfileImage');
+            image.src = e.target.result;
+            image.style.display = 'block'; // プレビューを表示
+            document.getElementById('modalProfileImageText').textContent = "";
+        };
+        
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            document.getElementById('modalProfileImage').src = "";
+            document.getElementById('modalProfileImage').style.display = "none";
+            document.getElementById('modalProfileImageText').textContent = "画像選択なし";
+        }
+    });
+    
+    // 入力内容をモーダルに表示する
+    function showModal() {
+        document.getElementById("modalName").textContent = document.getElementById("name").value;
+        document.getElementById("modalEmail").textContent = document.getElementById("email").value;
+        document.getElementById("modalFamilyName").textContent = document.getElementById("family_name").value;
+        document.getElementById("modalFirstName").textContent = document.getElementById("first_name").value;
+        document.getElementById("modalAge").textContent = document.getElementById("age").value;
+        document.getElementById("modalWeight").textContent = document.getElementById("weight").value;
+        document.getElementById("modalHeight").textContent = document.getElementById("height").value;
+        const genderText = document.getElementById("gender").options[document.getElementById("gender").selectedIndex].text;
+        document.getElementById("modalGender").textContent = genderText;
+    }
+    
+    // フォームのバリデーションとモーダル表示
+    function validateForm() {
+        const form = document.getElementById("userForm");
+        if (form.checkValidity()) {
+            showModal();  // モーダルにデータを反映
+            const modal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+            modal.show();  // モーダルを表示
+        } else {
+            form.reportValidity();  // バリデーションエラーを表示
+        }
+    }
+    
+    // フォームをサブミットする
+    function submitForm() {
+        document.getElementById("userForm").submit();
+    }
 </script>
 </body>
 </html>
