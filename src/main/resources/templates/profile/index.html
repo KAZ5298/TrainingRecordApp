@@ -5,18 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}">
+	<link rel="stylesheet" th:href="@{/css/profile.css}">
     <title>プロフィール管理</title>
-    <style>
-        .edit-btn {
-            margin-left: 10px;
-        }
-    </style>
+<!--    <style>-->
+<!--        .edit-btn {-->
+<!--            margin-left: 10px;-->
+<!--        }-->
+<!--    </style>-->
 </head>
 <body>
 <div class="container">
     <img src="/images/logo.jpg" alt="Logo" style="width: 100px; height: auto;">
     <h2>プロフィール管理</h2>
-    <form id="profileForm" th:action="@{/profile}" method="post">
+    <form id="profileForm" th:action="@{/profile/{id}}" method="post">
         
         <!-- ユーザー名 -->
         <div class="mb-3">

@@ -5,34 +5,44 @@
 
 <mapper namespace="com.example.training_app.repository.UserMapper">
 
-	 <!-- ユーザー情報の挿入 -->
-	 <insert id="registerUser" parameterType="com.example.training_app.model.User" useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO users
-		(
-			name,
-			email,
-			password,
-			family_name,
-			first_name,
-			age,
-			gender,
-			weight,
-			height,
-			profile_image
-		)
-		VALUES
-		(
-			#{name},
-			#{email},
-			#{password},
-			#{familyName},
-			#{firstName},
-			#{age},
-			#{gender},
-			#{weight},
-			#{height},
-			#{profileImage}
-		)
-	 </insert>
-	 
+     <!-- ユーザー情報の挿入 -->
+     <insert id="registerUser" parameterType="com.example.training_app.model.User" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO users
+        (
+            name,
+            email,
+            password,
+            family_name,
+            first_name,
+            age,
+            gender,
+            weight,
+            height,
+            profile_image
+        )
+        VALUES
+        (
+            #{name},
+            #{email},
+            #{password},
+            #{familyName},
+            #{firstName},
+            #{age},
+            #{gender},
+            #{weight},
+            #{height},
+            #{profileImage}
+        )
+     </insert>
+     
+     <!-- ユーザー情報取得 -->
+     <select id="getUserOne" parameterType="Long" resultType="com.example.training_app.model.User">
+         SELECT
+             *
+         FROM
+             users
+         WHERE
+             id = #{id}
+     </select>
+     
 </mapper>
