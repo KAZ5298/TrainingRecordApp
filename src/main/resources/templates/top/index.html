@@ -25,6 +25,10 @@
 <!--                <button type="submit" class="btn btn-primary">ログイン</button>-->
 <!--                <a th:href="@{/register}" class="btn btn-secondary">新規登録</a>-->
 <!--            </form>-->
+<div class="container mt-4">
+        <p>ログインユーザーID: <span th:text="${userId}"></span></p>
+        <a th:href="@{/profile/{userId}(userId=${userId})}" class="btn btn-secondary">プロフィール</a>
+    </div>
     </div>
     
     <!-- フッター -->

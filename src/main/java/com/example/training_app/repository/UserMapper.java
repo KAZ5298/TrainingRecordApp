@@ -6,7 +6,9 @@ import com.example.training_app.model.User;
 
 @Mapper
 public interface UserMapper {
-	
-	public int registerUser(User user);
-
+    
+    public int registerUser(User user);
+    
+    public User getUserOne(Long id);
+    
 }

@@ -12,26 +12,31 @@ import com.example.training_app.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {
-	
-	@Autowired
-	private UserMapper mapper;
-	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-	
-	@Autowired
-	private UserRepository userRepository;
-	
-	@Override
-	public void registerUser(User user) {
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		
-		mapper.registerUser(user);
-	}
-	
-	@Override
-	public User getLoginUser(String username) {
-		return userRepository.findByName(username)
-			.orElseThrow(() -> new UsernameNotFoundException("ユーザーが見つかりません"));
-	}
+    
+    @Autowired
+    private UserMapper mapper;
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    
+    @Autowired
+    private UserRepository userRepository;
+    
+    @Override
+    public void registerUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        
+        mapper.registerUser(user);
+    }
+    
+    @Override
+    public User getLoginUser(String username) {
+        return userRepository.findByName(username)
+            .orElseThrow(() -> new UsernameNotFoundException("ユーザーが見つかりません"));
+    }
+    
+    @Override
+    public User getUserOne(Long id) {
+        return mapper.getUserOne(id);
+    }
 }

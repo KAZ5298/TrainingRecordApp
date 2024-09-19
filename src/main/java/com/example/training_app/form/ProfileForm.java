@@ -15,7 +15,7 @@ import lombok.Data;
 
 @Data
 @PasswordMatches
-public class ProfileEditForm {
+public class ProfileForm {
     
     @NotBlank(message = "ユーザー名は入力必須です")
     private String name;

@@ -24,7 +24,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" th:href="@{/top}">トップ</a>
-                            <a class="dropdown-item" th:href="@{/profile}">プロフィール</a>
+                            <a class="dropdown-item" th:href="@{/profile/{id}(id=${userId})}">プロフィール</a>
                             <a class="dropdown-item" href="#">トレーニング記録</a>
                             <a class="dropdown-item" href="#">トレーニング種目</a>
                             <a class="dropdown-item" href="#">進捗管理</a>
