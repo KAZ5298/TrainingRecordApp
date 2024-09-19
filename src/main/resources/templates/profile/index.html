@@ -1,144 +1,226 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
     xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}">
-	<link rel="stylesheet" th:href="@{/css/profile.css}">
-    <title>プロフィール管理</title>
-<!--    <style>-->
-<!--        .edit-btn {-->
-<!--            margin-left: 10px;-->
-<!--        }-->
-<!--    </style>-->
+<head th:replace="~{layout/common :: common_head('プロフィール管理', '/css/profile.css')}">
 </head>
 <body>
-<div class="container">
-    <img src="/images/logo.jpg" alt="Logo" style="width: 100px; height: auto;">
-    <h2>プロフィール管理</h2>
-    <id="profileForm" th:action="@{/profile/{id}(id=${profileForm})}" method="post" th:object="${profileForm}">
-        
-        <!-- ユーザー名 -->
-        <div class="mb-3">
-            <label for="name">ユーザー名</label>
-            <div class="d-flex align-items-center">
-                <input type="text" class="form-control" id="name" disabled>
-                <button type="button" class="btn btn-primary edit-btn" onclick="enableEdit('name')">編集</button>
+    <!-- ヘッダー -->
+    <header th:insert="~{layout/common :: common_header('プロフィール管理')}"></header>
+    
+    <div class="container mt-4">
+        <form id="profileForm" th:action="@{/profile/{id}(id=${profileForm.id})}" method="post" th:object="${profileForm}">
+            <!-- ユーザー名 -->
+            <div class="mb-3">
+                <label for="name">ユーザー名</label>
+                <div class="d-flex align-items-center">
+                    <input type="text" class="form-control" id="name" th:field="*{name}" disabled>
+                    <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                    <button type="button" class="btn btn-primary edit-btn" onclick="enableEdit('name')">編集</button>
+                </div>
             </div>
-        </div>
-        
-        <!-- メールアドレス -->
-        <div class="mb-3">
-            <label for="email">メールアドレス</label>
-            <div class="d-flex align-items-center">
-                <input type="email" class="form-control" id="email" disabled>
-                <button type="button" class="btn btn-primary edit-btn" onclick="enableEdit('email')">編集</button>
+            
+            <!-- メールアドレス -->
+            <div class="mb-3">
+                <label for="email">メールアドレス</label>
+                <div class="d-flex align-items-center">
+                    <input type="email" class="form-control" id="email" th:field="*{email}" disabled>
+                    <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                    <button type="button" class="btn btn-primary edit-btn" onclick="enableEdit('email')">編集</button>
+                </div>
             </div>
-        </div>
-        
-        <!-- パスワード -->
-        <div class="mb-3">
-            <label for="password">パスワード</label>
-            <div class="d-flex align-items-center">
-                <input type="password" class="form-control" id="password" disabled>
-                <button type="button" class="btn btn-primary edit-btn" onclick="enableEdit('password')">編集</button>
+            
+            <!-- パスワード -->
+            <div class="mb-3">
+                <label for="password">パスワード</label>
+                <div class="d-flex align-items-center">
+                    <input type="password" class="form-control" id="password" th:field="*{password}" disabled>
+                    <button type="button" class="btn btn-primary edit-btn" onclick="enableEdit('password')">編集</button>
+                </div>
             </div>
-        </div>
-        
-        <!-- 姓 -->
-        <div class="mb-3">
-            <label for="family_name">姓</label>
-            <div class="d-flex align-items-center">
-                <input type="text" class="form-control" id="family_name" disabled>
-                <button type="button" class="btn btn-primary edit-btn" onclick="enableEdit('family_name')">編集</button>
+            
+            <!-- 姓 -->
+            <div class="mb-3">
+                <label for="family_name">姓</label>
+                <div class="d-flex align-items-center">
+                    <input type="text" class="form-control" id="family_name" th:field="*{familyName}" disabled>
+                    <div class="text-danger" th:if="${#fields.hasErrors('familyName')}" th:errors="*{familyName}"></div>
+                    <button type="button" class="btn btn-primary edit-btn" onclick="enableEdit('family_name')">編集</button>
+                </div>
             </div>
-        </div>
-        
-        <!-- 名 -->
-        <div class="mb-3">
-            <label for="first_name">名</label>
-            <div class="d-flex align-items-center">
-                <input type="text" class="form-control" id="first_name" disabled>
-                <button type="button" class="btn btn-primary edit-btn" onclick="enableEdit('first_name')">編集</button>
+            
+            <!-- 名 -->
+            <div class="mb-3">
+                <label for="first_name">名</label>
+                <div class="d-flex align-items-center">
+                    <input type="text" class="form-control" id="first_name" th:field="*{firstName}" disabled>
+                    <div class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
+                    <button type="button" class="btn btn-primary edit-btn" onclick="enableEdit('first_name')">編集</button>
+                </div>
             </div>
-        </div>
-        
-        <!-- 生年月日 -->
-        <div class="mb-3">
-            <label for="birthdate">生年月日</label>
-            <div class="d-flex align-items-center">
-                <input type="date" class="form-control" id="birthdate" disabled>
-                <button type="button" class="btn btn-primary edit-btn" onclick="enableEdit('birthdate')">編集</button>
+            
+            <!-- 生年月日 -->
+            <div class="mb-3">
+                <label for="birthdate">生年月日</label>
+                <div class="d-flex align-items-center">
+                    <input type="date" class="form-control" id="birthdate" disabled>
+                    <div class="text-danger" th:if="${#fields.hasErrors('birthdate')}" th:errors="*{birthdate}"></div>
+                    <button type="button" class="btn btn-primary edit-btn" onclick="enableEdit('birthdate')">編集</button>
+                </div>
             </div>
-        </div>
-        
-        <!-- 年齢 -->
-        <div class="mb-3">
-            <label for="age">年齢</label>
-            <div class="d-flex align-items-center">
-                <input type="text" class="form-control" id="age" name="age" disabled>
-                <button type="button" class="btn btn-primary edit-btn" onclick="enableEdit('age')">編集</button>
+            
+            <!-- 年齢 -->
+            <div class="mb-3">
+                <label for="age">年齢</label>
+                <div class="d-flex align-items-center">
+                    <input type="text" class="form-control" id="age" th:field="*{age}" readonly>
+                    <div class="text-danger" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
+                </div>
             </div>
-        </div>
-        
-        <!-- 体重 -->
-        <div class="mb-3">
-            <label for="weight">体重 (kg)</label>
-            <div class="d-flex align-items-center">
-                <input type="number" step="0.1" class="form-control" id="weight" disabled>
-                <button type="button" class="btn btn-primary edit-btn" onclick="enableEdit('weight')">編集</button>
+            
+            <!-- 体重 -->
+            <div class="mb-3">
+                <label for="weight">体重 (kg)</label>
+                <div class="d-flex align-items-center">
+                    <input type="number" step="0.1" class="form-control" id="weight" th:field="*{weight}" disabled>
+                    <div class="text-danger" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
+                    <button type="button" class="btn btn-primary edit-btn" onclick="enableEdit('weight')">編集</button>
+                </div>
             </div>
-        </div>
-        
-        <!-- 身長 -->
-        <div class="mb-3">
-            <label for="height">身長 (cm)</label>
-            <div class="d-flex align-items-center">
-                <input type="number" step="0.1" class="form-control" id="height" disabled>
-                <button type="button" class="btn btn-primary edit-btn" onclick="enableEdit('height')">編集</button>
+            
+            <!-- 身長 -->
+            <div class="mb-3">
+                <label for="height">身長 (cm)</label>
+                <div class="d-flex align-items-center">
+                    <input type="number" step="0.1" class="form-control" id="height" th:field="*{height}" disabled>
+                    <div class="text-danger" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
+                    <button type="button" class="btn btn-primary edit-btn" onclick="enableEdit('height')">編集</button>
+                </div>
             </div>
-        </div>
-        
-        <!-- 性別 -->
-        <div class="mb-3">
-            <label for="gender">性別</label>
-            <div class="d-flex align-items-center">
-                <select class="form-control" id="gender" disabled>
-                    <option value="">選択してください</option>
-                    <th:block th:each="gender : ${genderMap}">
-                        <option th:value="${gender.key}" th:text="${gender.value}"></option>
-                    </th:block>
-                </select>
-                <button type="button" class="btn btn-primary edit-btn" onclick="enableEdit('gender')">編集</button>
+            
+            <!-- 性別 -->
+            <div class="mb-3">
+                <label for="gender">性別</label>
+                <div class="d-flex align-items-center">
+                    <select class="form-control" id="gender" th:field="*{gender}" disabled>
+                        <option value="">選択してください</option>
+                        <th:block th:each="gender : ${genderMap}">
+                            <option th:value="${gender.key}" th:text="${gender.value}"></option>
+                        </th:block>
+                    </select>
+                    <div class="text-danger" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></div>
+                    <button type="button" class="btn btn-primary edit-btn" onclick="enableEdit('gender')">編集</button>
+                </div>
             </div>
-        </div>
-        
-        <!-- プロフィール画像 -->
-        <div class="mb-3">
-            <label for="profile_image">プロフィール画像</label>
-            <div class="d-flex align-items-center">
-                <input type="file" class="form-control" id="profile_image" disabled>
-                <button type="button" class="btn btn-primary edit-btn" onclick="enableEdit('profile_image')">編集</button>
+            
+            <!-- プロフィール画像 -->
+            <div class="mb-3">
+                <label for="profile_image">プロフィール画像</label>
+                <div class="d-flex align-items-center">
+                    <input type="file" class="form-control" id="profile_image" th:field="*{profileImage}" disabled>
+                    <button type="button" class="btn btn-primary edit-btn" onclick="enableEdit('profile_image')">編集</button>
+                </div>
             </div>
-        </div>
-        
-        <!-- 確認ボタン -->
-        <button type="button" class="btn btn-primary">確認</button>
-        <a th:href="@{/top}" class="btn btn-secondary">戻る</a>
-    </form>
-</div>
+            
+            <!-- 確認ボタン -->
+            <button type="submit" class="btn btn-primary" id="confirmBtn" disabled>確認</button>
+            <a th:href="@{/top}" class="btn btn-secondary">戻る</a>
+        </form>
+    </div>
+    
+    <!-- フッター -->
+    <footer th:insert="~{layout/common :: common_footer}"></footer>
 
-<!-- JavaScript -->
-<script>
-    function enableEdit(fieldId) {
+    
+    <script th:src="@{/webjars/popper.js/2.11.7/umd/popper.min.js}" defer></script>
+    <script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.min.js}" defer></script>
+    
+    <script>
         // 指定されたフィールドの disabled 属性を解除
-        document.getElementById(fieldId).disabled = false;
-    }
-</script>
-
-<script th:src="@{/webjars/popper.js/2.11.7/umd/popper.min.js}" defer></script>
-<script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.min.js}" defer></script>
+        function enableEdit(fieldId) {
+            document.getElementById(fieldId).disabled = false;
+            document.getElementById("confirmBtn").disabled = false;
+        }
+        
+        // 生年月日から年齢を計算
+        document.getElementById('birthdate').addEventListener('change', function() {
+            const birthdateValue = this.value;
+            if (birthdateValue) {
+                const birthdate = new Date(birthdateValue);
+                const today = new Date();
+                let age = today.getFullYear() - birthdate.getFullYear();
+                const monthDifference = today.getMonth() - birthdate.getMonth();
+                
+                if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthdate.getDate())) {
+                    age--;
+                }
+                document.getElementById('age').value = age;
+            }
+        });
+        
+        // 年齢から生年月日を計算
+        document.getElementById('age').addEventListener('change', function() {
+            const ageValue = this.value;
+            if (ageValue) {
+                const today = new Date();
+                const birthYear = today.getFullYear() - ageValue;
+                const birthdate = new Date(birthYear, today.getMonth(), today.getDate());
+                
+                // 生年月日フィールドに計算した日付を設定
+                document.getElementById('birthdate').value = birthdate.toISOString().split('T')[0];
+            }
+        });
+        
+        // プロフィール画像のプレビュー表示
+        document.getElementById('profile_image').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                const image = document.getElementById('modalProfileImage');
+                image.src = e.target.result;
+                image.style.display = 'block'; // プレビューを表示
+                document.getElementById('modalProfileImageText').textContent = "";
+            };
+            
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                document.getElementById('modalProfileImage').src = "";
+                document.getElementById('modalProfileImage').style.display = "none";
+                document.getElementById('modalProfileImageText').textContent = "画像選択なし";
+            }
+        });
+        
+        // 入力内容をモーダルに表示する
+        function showModal() {
+            document.getElementById("modalName").textContent = document.getElementById("name").value;
+            document.getElementById("modalEmail").textContent = document.getElementById("email").value;
+            document.getElementById("modalFamilyName").textContent = document.getElementById("family_name").value;
+            document.getElementById("modalFirstName").textContent = document.getElementById("first_name").value;
+            document.getElementById("modalAge").textContent = document.getElementById("age").value;
+            document.getElementById("modalWeight").textContent = document.getElementById("weight").value;
+            document.getElementById("modalHeight").textContent = document.getElementById("height").value;
+            const genderText = document.getElementById("gender").options[document.getElementById("gender").selectedIndex].text;
+            document.getElementById("modalGender").textContent = genderText;
+        }
+        
+        // フォームのバリデーションとモーダル表示
+        function validateForm() {
+            const form = document.getElementById("userForm");
+            if (form.checkValidity()) {
+                showModal();  // モーダルにデータを反映
+                const modal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+                modal.show();  // モーダルを表示
+            } else {
+                form.reportValidity();  // バリデーションエラーを表示
+            }
+        }
+        
+        // フォームをサブミットする
+        function submitForm() {
+            document.getElementById("profileForm").submit();
+        }
+    </script>
 
 </body>
 </html>

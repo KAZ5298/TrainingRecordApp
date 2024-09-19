@@ -34,5 +34,9 @@ public class LoginUserDetails implements UserDetails {
 	public String getFullname() {
 		return user.getFamilyName() + user.getFirstName();
 	}
+	
+	public Long getUserId() {
+	    return user.getId();
+	}
 
 }

@@ -4,8 +4,6 @@ import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,19 +32,15 @@ public class ProfileController {
     public String getProfile(Model model, @PathVariable("id") Long id) {
         model.addAttribute("genderMap", applicationService.getGenderMap());
         
-        // ログインユーザー情報取得
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User) authentication.getPrincipal();
+        User user = userService.getUserOne(id);
         
         if (user == null) {
-        	return "redirect:/top";
+            return "redirect:/top";
         }
         
         ProfileForm profileForm = modelMapper.map(user, ProfileForm.class);
         
         model.addAttribute("profileForm", profileForm);
-        
-        model.addAttribute("userId", user.getId());
         
         logger.info("フォームデータ: {}", profileForm);
         
