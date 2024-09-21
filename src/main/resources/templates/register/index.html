@@ -8,7 +8,7 @@
     <header th:insert="~{layout/common :: common_header('ユーザー登録')}"></header>
     
     <div class="container mt-4">
-        <form id="userForm" th:action="@{/register}" method="post" th:object="${userRegisterForm}">
+        <form id="registerForm" th:action="@{/register}" method="post" th:object="${userRegisterForm}">
             <div class="mb-3">
                 <label for="name">ユーザー名</label>
                 <input type="text" class="form-control" id="name" th:field="*{name}">
@@ -82,6 +82,9 @@
     <!-- フッター -->
     <footer th:insert="~{layout/common :: common_footer}"></footer>
 
+    <script th:src="@{/webjars/popper.js/2.11.7/umd/popper.min.js}" defer></script>
+    <script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.min.js}" defer></script>
+
     <!-- モーダルウィンドウのHTML -->
     <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -114,10 +117,14 @@
         </div>
     </div>
     
-    <script th:src="@{/webjars/popper.js/2.11.7/umd/popper.min.js}" defer></script>
-    <script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.min.js}" defer></script>
-    
     <script>
+		// フラグによってモーダルウィンドウを表示しないようにする
+		const hasErrors = /*[[${hasErrors}]]*/ false;
+		if (!hasErrors) {
+			const modal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+			modal.show();
+		}
+		
         // 生年月日から年齢を計算
         document.getElementById('birthdate').addEventListener('change', function() {
             const birthdateValue = this.value;
@@ -156,34 +163,46 @@
             }
         });
         
-        // 入力内容をモーダルに表示する
-        function showModal() {
-            document.getElementById("modalName").textContent = document.getElementById("name").value;
-            document.getElementById("modalEmail").textContent = document.getElementById("email").value;
-            document.getElementById("modalFamilyName").textContent = document.getElementById("family_name").value;
-            document.getElementById("modalFirstName").textContent = document.getElementById("first_name").value;
-            document.getElementById("modalAge").textContent = document.getElementById("age").value;
-            document.getElementById("modalWeight").textContent = document.getElementById("weight").value;
-            document.getElementById("modalHeight").textContent = document.getElementById("height").value;
-            const genderText = document.getElementById("gender").options[document.getElementById("gender").selectedIndex].text;
-            document.getElementById("modalGender").textContent = genderText;
-        }
-        
-        // フォームのバリデーションとモーダル表示
+        // フォームデータをモーダルウィンドウに表示
         function validateForm() {
-            const form = document.getElementById("userForm");
-            if (form.checkValidity()) {
-                showModal();  // モーダルにデータを反映
-                const modal = new bootstrap.Modal(document.getElementById('confirmationModal'));
-                modal.show();  // モーダルを表示
+            // 各フィールドの値を取得してモーダルに表示
+            document.getElementById('modalName').textContent = document.getElementById('name').value;
+            document.getElementById('modalEmail').textContent = document.getElementById('email').value;
+            document.getElementById('modalFamilyName').textContent = document.getElementById('family_name').value;
+            document.getElementById('modalFirstName').textContent = document.getElementById('first_name').value;
+            document.getElementById('modalAge').textContent = document.getElementById('age').value;
+            document.getElementById('modalWeight').textContent = document.getElementById('weight').value;
+            document.getElementById('modalHeight').textContent = document.getElementById('height').value;
+            
+            const gender = document.getElementById('gender');
+            document.getElementById('modalGender').textContent = gender.options[gender.selectedIndex].text;
+            
+            // プロフィール画像のプレビュー
+            const profileImageInput = document.getElementById('profile_image');
+            const profileImageFile = profileImageInput.files[0];
+            const modalProfileImage = document.getElementById('modalProfileImage');
+            if (profileImageFile) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    modalProfileImage.src = e.target.result;
+                    modalProfileImage.style.display = 'block';
+                };
+                reader.readAsDataURL(profileImageFile);
+                document.getElementById('modalProfileImageText').style.display = 'none';
             } else {
-                form.reportValidity();  // バリデーションエラーを表示
+                modalProfileImage.style.display = 'none';
+                document.getElementById('modalProfileImageText').textContent = '画像は選択されていません';
+                document.getElementById('modalProfileImageText').style.display = 'block';
             }
+            
+            // モーダルを表示
+            const confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+            confirmationModal.show();
         }
         
         // フォームをサブミットする
         function submitForm() {
-            document.getElementById("userForm").submit();
+            document.getElementById("registerForm").submit();
         }
     </script>
 </body>

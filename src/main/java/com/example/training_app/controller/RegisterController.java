@@ -45,6 +45,12 @@ public class RegisterController {
     public String postRegister(@ModelAttribute @Valid UserRegisterForm userRegisterForm,
             BindingResult bindingResult, Model model) {
         
+        // パスワード一致チェック
+        if (!userRegisterForm.getPassword().equals(userRegisterForm.getPasswordConfirm())) {
+            bindingResult.rejectValue("passwordConfirm", "error.passwordConfirm", "パスワードが一致しません");
+        }
+        
+        // エラー時
         if (bindingResult.hasErrors()) {
             List<String> errorMessages = bindingResult.getAllErrors().stream()
                     .map(error -> error.getDefaultMessage())
@@ -52,9 +58,8 @@ public class RegisterController {
             
             model.addAttribute("errorMessages", errorMessages);
             
-            if (!userRegisterForm.getPassword().equals(userRegisterForm.getPasswordConfirm())) {
-                bindingResult.rejectValue("passwordConfirm", "error.passwordConfirm", "パスワードが一致しません");
-            }
+             // モーダルウィンドウを表示しないためのフラグ
+            model.addAttribute("hasErrors", true);
             
             model.addAttribute("genderMap", applicationService.getGenderMap());
             
