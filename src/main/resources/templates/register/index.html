@@ -182,7 +182,10 @@
         
         // バリデーションチェック
         function validateForm() {
+            const form = document.getElementById("registerForm");
             let isValid = true; // バリデーション結果を追跡する変数
+            
+            // 入力値の取得
             const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value.trim();
@@ -195,7 +198,7 @@
             const height = document.getElementById('height').value.trim();
             const gender = document.getElementById('gender').value.trim();
             
-            
+            // エラーメッセージ要素の初期化
             const nameError = document.getElementById('nameError');
             const emailError = document.getElementById('emailError');
             const passwordError = document.getElementById('passwordError');
@@ -208,6 +211,7 @@
             const heightError = document.getElementById('heightError');
             const genderError = document.getElementById('genderError');
             
+            // エラーメッセージのクリア
             nameError.textContent = '';
             emailError.textContent = '';
             passwordError.textContent = '';
@@ -283,7 +287,16 @@
                 isValid = false;
             }
             
-            // バリデーションに失敗した場合はフォーム送信を防ぐ
+            // バリデーションが成功した場合、モーダルを表示
+            if (isValid) {
+                showModal();  // モーダルにデータを反映
+                const modal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+                modal.show();  // モーダルを表示
+            } else {
+                form.reportValidity();  // バリデーションエラーを表示
+            }
+            
+            // バリデーション結果を返す
             return isValid;
         }
         
