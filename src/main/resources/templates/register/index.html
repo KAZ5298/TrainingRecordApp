@@ -12,51 +12,61 @@
             <div class="mb-3">
                 <label for="name">ユーザー名</label>
                 <input type="text" class="form-control" id="name" th:field="*{name}">
+                <div class="text-danger" id="nameError"></div>
                 <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
             </div>
             <div class="mb-3">
                 <label for="email">メールアドレス</label>
                 <input type="email" class="form-control" id="email" th:field="*{email}">
+                <div class="text-danger" id="emailError"></div>
                 <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
             </div>
             <div class="mb-3">
                 <label for="password">パスワード</label>
                 <input type="password" class="form-control" id="password" th:field="*{password}">
+                <div class="text-danger" id="passwordError"></div>
                 <div class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
             </div>
             <div class="mb-3">
                 <label for="password_confirm">パスワードの確認</label>
                 <input type="password" class="form-control" id="password_confirm" th:field="*{passwordConfirm}">
+                <div class="text-danger" id="password_confirmError"></div>
                 <div class="text-danger" th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}"></div>
             </div>
             <div class="mb-3">
                 <label for="family_name">姓</label>
                 <input type="text" class="form-control" id="family_name" th:field="*{familyName}">
+                <div class="text-danger" id="family_nameError"></div>
                 <div class="text-danger" th:if="${#fields.hasErrors('familyName')}" th:errors="*{familyName}"></div>
             </div>
             <div class="mb-3">
                 <label for="first_name">名</label>
                 <input type="text" class="form-control" id="first_name" th:field="*{firstName}">
+                <div class="text-danger" id="first_nameError"></div>
                 <div class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
             </div>
             <div class="mb-3">
                 <label for="birthdate">生年月日</label>
                 <input type="date" class="form-control" id="birthdate" th:field="*{birthdate}">
+                <div class="text-danger" id="birthdateError"></div>
                 <div class="text-danger" th:if="${#fields.hasErrors('birthdate')}" th:errors="*{birthdate}"></div>
             </div>
             <div class="mb-3">
                 <label for="age">年齢</label>
                 <input type="text" class="form-control" id="age" name="age" th:field="*{age}" readonly>
+                <div class="text-danger" id="ageError"></div>
                 <div class="text-danger" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
             </div>
             <div class="mb-3">
                 <label for="weight">体重 (kg)</label>
                 <input type="number" step="0.1" class="form-control" id="weight" th:field="*{weight}">
+                <div class="text-danger" id="weightError"></div>
                 <div class="text-danger" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
             </div>
             <div class="mb-3">
                 <label for="height">身長 (cm)</label>
                 <input type="number" step="0.1" class="form-control" id="height" th:field="*{height}">
+                <div class="text-danger" id="heightError"></div>
                 <div class="text-danger" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
             </div>
             <div class="mb-3">
@@ -67,6 +77,7 @@
                         <option th:value="${gender.key}" th:text="${gender.value}"></option>
                     </th:block>
                 </select>
+                <div class="text-danger" id="genderError"></div>
                 <div class="text-danger" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></div>
             </div>
             <div class="mb-3">
@@ -131,7 +142,7 @@
                 }
                 document.getElementById('age').value = age;
             } else {
-                document.getElementById('age').value = "";
+                document.getElementById('age').value = '';
             }
         });
         
@@ -169,17 +180,119 @@
             document.getElementById("modalGender").textContent = genderText;
         }
         
-        // フォームのバリデーションとモーダル表示
+        // バリデーションチェック
         function validateForm() {
-            const form = document.getElementById("registerForm");
-            if (form.checkValidity()) {
-                showModal();  // モーダルにデータを反映
-                const modal = new bootstrap.Modal(document.getElementById('confirmationModal'));
-                modal.show();  // モーダルを表示
-            } else {
-                form.reportValidity();  // バリデーションエラーを表示
+            let isValid = true; // バリデーション結果を追跡する変数
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const password_confirm = document.getElementById('password_confirm').value.trim();
+            const family_name = document.getElementById('family_name').value.trim();
+            const first_name = document.getElementById('first_name').value.trim();
+            const birthdate = document.getElementById('birthdate').value.trim();
+            const age = document.getElementById('age').value.trim();
+            const weight = document.getElementById('weight').value.trim();
+            const height = document.getElementById('height').value.trim();
+            const gender = document.getElementById('gender').value.trim();
+            
+            
+            const nameError = document.getElementById('nameError');
+            const emailError = document.getElementById('emailError');
+            const passwordError = document.getElementById('passwordError');
+            const password_confirmError = document.getElementById('password_confirmError');
+            const family_nameError = document.getElementById('family_nameError');
+            const first_nameError = document.getElementById('first_nameError');
+            const birthdateError = document.getElementById('birthdateError');
+            const ageError = document.getElementById('ageError');
+            const weightError = document.getElementById('weightError');
+            const heightError = document.getElementById('heightError');
+            const genderError = document.getElementById('genderError');
+            
+            nameError.textContent = '';
+            emailError.textContent = '';
+            passwordError.textContent = '';
+            password_confirmError.textContent = '';
+            family_nameError.textContent = '';
+            first_nameError.textContent = '';
+            birthdateError.textContent = '';
+            ageError.textContent = '';
+            weightError.textContent = '';
+            heightError.textContent = '';
+            genderError.textContent = '';
+            
+            // メールアドレスの正規表現パターン
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (name === '') {
+                nameError.textContent = 'ユーザー名は入力必須です';
+                isValid = false;
             }
+            if (email === '') {
+                emailError.textContent = 'メールアドレスは入力必須です';
+                isValid = false;
+            } else if (!emailPattern.test(email)) {
+                emailError.textContent = '正しいメールアドレスを入力してください';
+                isValid = false;
+            }
+            if (password === '') {
+                passwordError.textContent = 'パスワードは入力必須です';
+                isValid = false;
+            }
+            if (password_confirm === '') {
+                password_confirmError.textContent = 'パスワード確認は入力必須です';
+                isValid = false;
+            } else if (password !== password_confirm) {
+                password_confirmError.textContent = 'パスワードが一致しません';
+                isValid = false;
+            }
+            if (family_name === '') {
+                family_nameError.textContent = '姓は入力必須です';
+                isValid = false;
+            }
+            if (first_name === '') {
+                first_nameError.textContent = '名は入力必須です';
+                isValid = false;
+            }
+            if (birthdate === '') {
+                birthdateError.textContent = '生年月日は入力必須です';
+                isValid = false;
+            }
+            if (age === '') {
+                ageError.textContent = '年齢は入力必須です';
+                isValid = false;
+            } else if (age <= 0) {
+                ageError.textContent = '年齢は正しく入力してください';
+                isValid = false;
+            }
+            if (weight === '') {
+                weightError.textContent = '体重は入力必須です';
+                isValid = false;
+            } else if (weight <= 0) {
+                weightError.textContent = '体重は正しく入力してください';
+                isValid = false;
+            }
+            if (height === '') {
+                heightError.textContent = '身長は入力必須です';
+                isValid = false;
+            } else if (height <= 0) {
+                heightError.textContent = '身長は正しく入力してください';
+                isValid = false;
+            }
+            if (gender === '') {
+                genderError.textContent = '性別は選択必須です';
+                isValid = false;
+            }
+            
+            // バリデーションに失敗した場合はフォーム送信を防ぐ
+            return isValid;
         }
+        
+        // フォーム送信時にバリデーション関数を実行
+        document.getElementById('registerForm').onsubmit = function(event) {
+            if (!validateForm()) {
+                event.preventDefault(); // バリデーションに失敗した場合、送信を防ぐ
+            }
+        };
         
         // フォームをサブミットする
         function submitForm() {
