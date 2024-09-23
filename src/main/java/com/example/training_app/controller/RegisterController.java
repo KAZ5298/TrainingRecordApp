@@ -58,9 +58,6 @@ public class RegisterController {
             
             model.addAttribute("errorMessages", errorMessages);
             
-            // モーダルウィンドウを表示しないためのフラグ
-            model.addAttribute("hasErrors", true);
-            
             model.addAttribute("genderMap", applicationService.getGenderMap());
             
             return "register/index";
