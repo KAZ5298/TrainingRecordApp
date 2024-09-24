@@ -35,7 +35,7 @@ public class ProfileController {
         User user = userService.getUserOne(id);
         
         if (user == null) {
-            return "redirect:/top";
+            return "redirect:/login";
         }
         
         ProfileForm profileForm = modelMapper.map(user, ProfileForm.class);

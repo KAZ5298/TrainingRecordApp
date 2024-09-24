@@ -39,4 +39,8 @@ public class LoginUserDetails implements UserDetails {
 	    return user.getId();
 	}
 
+	public String getprofileImage() {
+		return user.getProfileImage();
+	}
+
 }

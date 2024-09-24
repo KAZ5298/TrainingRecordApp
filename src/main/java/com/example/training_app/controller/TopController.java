@@ -20,6 +20,7 @@ public class TopController {
         if (authentication != null && authentication.getPrincipal() instanceof LoginUserDetails) {
             LoginUserDetails user = (LoginUserDetails) authentication.getPrincipal();
             model.addAttribute("userId", user.getUserId()); // userIdをモデルに追加
+            model.addAttribute("profileImage", user.getprofileImage());
         } else {
             // 認証されていない場合はログイン画面にリダイレクト
             return "redirect:/login";
