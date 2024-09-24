@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.training_app.custom.PasswordMatches;
 
@@ -55,5 +56,5 @@ public class UserRegisterForm {
     @NotNull(message = "性別は選択必須です")
     private Integer gender;
     
-    private String profileImage;
+    private MultipartFile profileImage;
 }
