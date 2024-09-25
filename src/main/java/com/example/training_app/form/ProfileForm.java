@@ -58,4 +58,10 @@ public class ProfileForm {
     private Integer gender;
     
     private String profileImage;
+    
+    private String currentPassword;
+    
+    private String newPassword;
+    
+    private String newPasswordConfirm;
 }

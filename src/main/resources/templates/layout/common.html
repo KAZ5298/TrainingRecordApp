@@ -17,7 +17,7 @@
             <h2 class="mb-0" th:text="${title}">Default Title</h2>
             <div class="ms-auto" sec:authorize="isAuthenticated()">
                 <ul class="navbar-nav">
-                    <img th:src="@{${profileImage}}" alt="プロフィール画像">
+                    <img th:src="@{${profileImage}}" alt="プロフィール画像" style="width: 50px; height: auto;">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" 
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">

@@ -42,6 +42,9 @@ public class ProfileController {
         
         model.addAttribute("profileForm", profileForm);
         
+        // ヘッダーのプロフィール画像用
+        model.addAttribute("profileImage", profileForm.getProfileImage());
+        
         logger.info("フォームデータ: {}", profileForm);
         
         return "profile/index";
