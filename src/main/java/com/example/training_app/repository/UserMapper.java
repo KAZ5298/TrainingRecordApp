@@ -11,4 +11,8 @@ public interface UserMapper {
     
     public User getUserOne(Long id);
     
+    public void updateUser(User user);
+    
+    public void updatePassword(User user);
+    
 }

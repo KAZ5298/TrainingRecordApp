@@ -45,4 +45,32 @@
              id = #{id}
      </select>
      
+     <!-- ユーザー情報の更新 -->
+     <update id="updateUser" parameterType="com.example.training_app.model.User">
+         UPDATE
+            users
+         SET
+            name = #{name},
+            email = #{email},
+            family_name = #{familyName},
+            first_name = #{firstName},
+            age = #{age},
+            gender = #{gender},
+            weight = #{weight},
+            height = #{height},
+            profile_image = #{profileImage}
+         WHERE
+            id = #{id}
+     </update>
+     
+     <!-- パスワードの更新 -->
+     <update id="updatePassword" parameterType="com.example.training_app.model.User">
+         UPDATE
+            users
+         SET
+            password = #{password}
+         WHERE
+            id = #{id}
+     </update>
+     
 </mapper>

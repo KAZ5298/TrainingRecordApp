@@ -39,4 +39,16 @@ public class UserServiceImpl implements UserService {
     public User getUserOne(Long id) {
         return mapper.getUserOne(id);
     }
+    
+    @Override
+    public void updateUser(User user) {
+        mapper.updateUser(user);
+    }
+    
+    @Override
+    public void updatePassword(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        
+        mapper.updatePassword(user);
+    }
 }

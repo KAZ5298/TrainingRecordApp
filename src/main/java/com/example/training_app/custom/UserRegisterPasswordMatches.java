@@ -10,10 +10,10 @@ import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
 @Documented
-@Constraint(validatedBy = PasswordMatchesValidator.class)
+@Constraint(validatedBy = UserRegisterPasswordMatchesValidator.class)
 @Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
-public @interface PasswordMatches {
+public @interface UserRegisterPasswordMatches {
     String message() default "{PasswordMatches.userRegisterForm}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};

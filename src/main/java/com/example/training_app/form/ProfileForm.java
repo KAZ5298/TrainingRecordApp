@@ -9,12 +9,9 @@ import jakarta.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.example.training_app.custom.PasswordMatches;
-
 import lombok.Data;
 
 @Data
-@PasswordMatches
 public class ProfileForm {
     
     private Long id;

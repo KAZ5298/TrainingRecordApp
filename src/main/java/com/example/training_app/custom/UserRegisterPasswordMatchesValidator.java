@@ -5,7 +5,7 @@ import jakarta.validation.ConstraintValidatorContext;
 
 import com.example.training_app.form.UserRegisterForm;
 
-public class PasswordMatchesValidator implements ConstraintValidator<PasswordMatches, UserRegisterForm> {
+public class UserRegisterPasswordMatchesValidator implements ConstraintValidator<UserRegisterPasswordMatches, UserRegisterForm> {
     
     @Override
     public boolean isValid(UserRegisterForm form, ConstraintValidatorContext context) {

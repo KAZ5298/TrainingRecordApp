@@ -10,12 +10,12 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.training_app.custom.PasswordMatches;
+import com.example.training_app.custom.UserRegisterPasswordMatches;
 
 import lombok.Data;
 
 @Data
-@PasswordMatches
+@UserRegisterPasswordMatches
 public class UserRegisterForm {
     
     @NotBlank(message = "ユーザー名は入力必須です")
