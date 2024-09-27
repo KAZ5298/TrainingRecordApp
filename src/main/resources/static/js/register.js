@@ -68,91 +68,91 @@ function validateForm() {
     const gender = document.getElementById('gender').value.trim();
     
     // エラーメッセージ要素の初期化
-    const nameError = document.getElementById('nameError');
-    const emailError = document.getElementById('emailError');
-    const passwordError = document.getElementById('passwordError');
-    const password_confirmError = document.getElementById('password_confirmError');
-    const family_nameError = document.getElementById('family_nameError');
-    const first_nameError = document.getElementById('first_nameError');
-    const birthdateError = document.getElementById('birthdateError');
-    const ageError = document.getElementById('ageError');
-    const weightError = document.getElementById('weightError');
-    const heightError = document.getElementById('heightError');
-    const genderError = document.getElementById('genderError');
+    const frontendNameError = document.getElementById('frontendNameError');
+    const frontendEmailError = document.getElementById('frontendEmailError');
+    const frontendPasswordError = document.getElementById('frontendPasswordError');
+    const frontendPassword_confirmError = document.getElementById('frontendPassword_confirmError');
+    const frontendFamily_nameError = document.getElementById('frontendFamily_nameError');
+    const frontendFirst_nameError = document.getElementById('frontendFirst_nameError');
+    const frontendBirthdateError = document.getElementById('frontendBirthdateError');
+    const frontendAgeError = document.getElementById('frontendAgeError');
+    const frontendWeightError = document.getElementById('frontendWeightError');
+    const frontendHeightError = document.getElementById('frontendHeightError');
+    const frontendGenderError = document.getElementById('frontendGenderError');
     
     // エラーメッセージのクリア
-    nameError.textContent = '';
-    emailError.textContent = '';
-    passwordError.textContent = '';
-    password_confirmError.textContent = '';
-    family_nameError.textContent = '';
-    first_nameError.textContent = '';
-    birthdateError.textContent = '';
-    ageError.textContent = '';
-    weightError.textContent = '';
-    heightError.textContent = '';
-    genderError.textContent = '';
+    frontendNameError.textContent = '';
+    frontendEmailError.textContent = '';
+    frontendPasswordError.textContent = '';
+    frontendPassword_confirmError.textContent = '';
+    frontendFamily_nameError.textContent = '';
+    frontendFirst_nameError.textContent = '';
+    frontendBirthdateError.textContent = '';
+    frontendAgeError.textContent = '';
+    frontendWeightError.textContent = '';
+    frontendHeightError.textContent = '';
+    frontendGenderError.textContent = '';
     
     // メールアドレスの正規表現パターン
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     
     if (name === '') {
-        nameError.textContent = 'ユーザー名は入力必須です';
+        frontendNameError.textContent = 'ユーザー名は入力必須です';
         isValid = false;
     }
     if (email === '') {
-        emailError.textContent = 'メールアドレスは入力必須です';
+        frontendEmailError.textContent = 'メールアドレスは入力必須です';
         isValid = false;
     } else if (!emailPattern.test(email)) {
-        emailError.textContent = '正しいメールアドレスを入力してください';
+        frontendEmailError.textContent = '正しいメールアドレスを入力してください';
         isValid = false;
     }
     if (password === '') {
-        passwordError.textContent = 'パスワードは入力必須です';
+        frontendPasswordError.textContent = 'パスワードは入力必須です';
         isValid = false;
     }
     if (password_confirm === '') {
-        password_confirmError.textContent = 'パスワード確認は入力必須です';
+        frontendPassword_confirmError.textContent = 'パスワード確認は入力必須です';
         isValid = false;
     } else if (password !== password_confirm) {
-        password_confirmError.textContent = 'パスワードが一致しません';
+        frontendPassword_confirmError.textContent = 'パスワードが一致しません';
         isValid = false;
     }
     if (family_name === '') {
-        family_nameError.textContent = '姓は入力必須です';
+        frontendFamily_nameError.textContent = '姓は入力必須です';
         isValid = false;
     }
     if (first_name === '') {
-        first_nameError.textContent = '名は入力必須です';
+        frontendFirst_nameError.textContent = '名は入力必須です';
         isValid = false;
     }
     if (birthdate === '') {
-        birthdateError.textContent = '生年月日は入力必須です';
+        frontendBirthdateError.textContent = '生年月日は入力必須です';
         isValid = false;
     }
     if (age === '') {
-        ageError.textContent = '年齢は入力必須です';
+        frontendAgeError.textContent = '年齢は入力必須です';
         isValid = false;
     } else if (age <= 0) {
-        ageError.textContent = '年齢は正しく入力してください';
+        frontendAgeError.textContent = '年齢は正しく入力してください';
         isValid = false;
     }
     if (weight === '') {
-        weightError.textContent = '体重は入力必須です';
+        frontendWeightError.textContent = '体重は入力必須です';
         isValid = false;
     } else if (weight <= 0) {
-        weightError.textContent = '体重は正しく入力してください';
+        frontendWeightError.textContent = '体重は正しく入力してください';
         isValid = false;
     }
     if (height === '') {
-        heightError.textContent = '身長は入力必須です';
+        frontendHeightError.textContent = '身長は入力必須です';
         isValid = false;
     } else if (height <= 0) {
-        heightError.textContent = '身長は正しく入力してください';
+        frontendHeightError.textContent = '身長は正しく入力してください';
         isValid = false;
     }
     if (gender === '') {
-        genderError.textContent = '性別は選択必須です';
+        frontendGenderError.textContent = '性別は選択必須です';
         isValid = false;
     }
     

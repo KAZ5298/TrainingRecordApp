@@ -13,62 +13,82 @@
             <div class="mb-3">
                 <label for="name">ユーザー名</label>
                 <input type="text" class="form-control" id="name" th:field="*{name}">
-                <div class="text-danger" id="nameError"></div>
-                <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                <span id="nameError" class="text-danger">
+                    <span id="frontendNameError"></span>
+                    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                </span>
             </div>
             <div class="mb-3">
                 <label for="email">メールアドレス</label>
                 <input type="email" class="form-control" id="email" th:field="*{email}">
-                <div class="text-danger" id="emailError"></div>
-                <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                <span id="emailError" class="text-danger">
+                    <span id="frontendEmailError"></span>
+                    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                </span>
             </div>
             <div class="mb-3">
                 <label for="password">パスワード</label>
                 <input type="password" class="form-control" id="password" th:field="*{password}">
-                <div class="text-danger" id="passwordError"></div>
-                <div class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                <span id="passwordError" class="text-danger">
+                    <span id="frontendPasswordError"></span>
+                    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                </span>
             </div>
             <div class="mb-3">
                 <label for="password_confirm">パスワードの確認</label>
                 <input type="password" class="form-control" id="password_confirm" th:field="*{passwordConfirm}">
-                <div class="text-danger" id="password_confirmError"></div>
-                <div class="text-danger" th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}"></div>
+                <span id="password_confirmError" class="text-danger">
+                    <span id="frontendPassword_confirmError"></span>
+                    <span th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}"></span>
+                </span>
             </div>
             <div class="mb-3">
                 <label for="family_name">姓</label>
                 <input type="text" class="form-control" id="family_name" th:field="*{familyName}">
-                <div class="text-danger" id="family_nameError"></div>
-                <div class="text-danger" th:if="${#fields.hasErrors('familyName')}" th:errors="*{familyName}"></div>
+                <span id="family_nameError" class="text-danger">
+                    <span id="frontendFamily_nameError"></span>
+                    <span th:if="${#fields.hasErrors('familyName')}" th:errors="*{familyName}"></span>
+                </span>
             </div>
             <div class="mb-3">
                 <label for="first_name">名</label>
                 <input type="text" class="form-control" id="first_name" th:field="*{firstName}">
-                <div class="text-danger" id="first_nameError"></div>
-                <div class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
+                <span id="first_nameError" class="text-danger">
+                    <span id="frontendFirst_nameError"></span>
+                    <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+                </span>
             </div>
             <div class="mb-3">
                 <label for="birthdate">生年月日</label>
                 <input type="date" class="form-control" id="birthdate" th:field="*{birthdate}">
-                <div class="text-danger" id="birthdateError"></div>
-                <div class="text-danger" th:if="${#fields.hasErrors('birthdate')}" th:errors="*{birthdate}"></div>
+                <span id="birthdateError" class="text-danger">
+                    <span id="frontendBirthdateError"></span>
+                    <span th:if="${#fields.hasErrors('birthdate')}" th:errors="*{birthdate}"></span>
+                </span>
             </div>
             <div class="mb-3">
                 <label for="age">年齢（※生年月日を入力すると自動計算されます）</label>
                 <input type="text" class="form-control" id="age" name="age" th:field="*{age}" readonly>
-                <div class="text-danger" id="ageError"></div>
-                <div class="text-danger" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
+                <span id="ageError" class="text-danger">
+                    <span id="frontendAgeError"></span>
+                    <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
+                </span>
             </div>
             <div class="mb-3">
                 <label for="weight">体重 (kg)</label>
                 <input type="number" step="0.1" class="form-control" id="weight" th:field="*{weight}">
-                <div class="text-danger" id="weightError"></div>
-                <div class="text-danger" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
+                <span id="weightError" class="text-danger">
+                    <span id="frontendWeightError"></span>
+                    <span th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></span>
+                </span>
             </div>
             <div class="mb-3">
                 <label for="height">身長 (cm)</label>
                 <input type="number" step="0.1" class="form-control" id="height" th:field="*{height}">
-                <div class="text-danger" id="heightError"></div>
-                <div class="text-danger" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
+                <span id="heightError" class="text-danger">
+                    <span id="frontendHeightError"></span>
+                    <span th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></span>
+                </span>
             </div>
             <div class="mb-3">
                 <label for="gender">性別</label>
@@ -78,8 +98,10 @@
                         <option th:value="${gender.key}" th:text="${gender.value}"></option>
                     </th:block>
                 </select>
-                <div class="text-danger" id="genderError"></div>
-                <div class="text-danger" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></div>
+                <span id="genderError" class="text-danger">
+                    <span id="frontendGenderError"></span>
+                    <span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></span>
+                </span>
             </div>
             <div class="mb-3">
                 <label for="profile_image">プロフィール画像</label>

@@ -16,8 +16,10 @@
                     <input type="text" class="form-control" id="name" th:field="*{name}" disabled>
                     <button type="button" class="btn btn-primary edit-btn" onclick="enableEdit('name')">編集</button>
                 </div>
-                <div class="text-danger" id="nameError"></div>
-                <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+				<span id="nameError" class="error-message">
+				    <span id="frontendNameError"></span> <!-- フロントエンド用エラーメッセージ -->
+				    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span> <!-- サーバーサイドのエラーメッセージ -->
+				</span>
             </div>
             
             <!-- メールアドレス -->

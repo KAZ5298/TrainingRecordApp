@@ -6,11 +6,11 @@ function enableEdit(fieldId) {
 }
 
 // 送信前に全てのdisabledを解除
-document.getElementById("updateForm").addEventListener("submit", function() {
-    document.querySelectorAll('input[disabled], select[disabled]').forEach(function(element) {
-        element.disabled = false;
-    });
-});
+//document.getElementById("updateForm").addEventListener("submit", function() {
+//    document.querySelectorAll('input[disabled], select[disabled]').forEach(function(element) {
+//        element.disabled = false;
+//    });
+//});
 
 // 生年月日から年齢を計算
 document.getElementById('birthdate').addEventListener('change', function() {
