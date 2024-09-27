@@ -1,13 +1,16 @@
 // 指定されたフィールドの disabled 属性を解除
-//function enableEdit(fieldId) {
-//    document.getElementById(fieldId).disabled = false;
-//    document.getElementById("confirmBtn").disabled = false;
-//}
 function enableEdit(fieldId) {
     const inputField = document.getElementById(fieldId);
     inputField.disabled = false;
     document.getElementById("confirmBtn").disabled = false;  // 確認ボタンを有効化
 }
+
+// 送信前に全てのdisabledを解除
+document.getElementById("updateForm").addEventListener("submit", function() {
+    document.querySelectorAll('input[disabled], select[disabled]').forEach(function(element) {
+        element.disabled = false;
+    });
+});
 
 // 生年月日から年齢を計算
 document.getElementById('birthdate').addEventListener('change', function() {
@@ -83,8 +86,6 @@ function validateForm() {
     // 入力値の取得
     const name = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value.trim();
-    const password_confirm = document.getElementById('password_confirm').value.trim();
     const family_name = document.getElementById('family_name').value.trim();
     const first_name = document.getElementById('first_name').value.trim();
     const birthdate = document.getElementById('birthdate').value.trim();
@@ -96,8 +97,6 @@ function validateForm() {
     // エラーメッセージ要素の初期化
     const nameError = document.getElementById('nameError');
     const emailError = document.getElementById('emailError');
-    const passwordError = document.getElementById('passwordError');
-    const password_confirmError = document.getElementById('password_confirmError');
     const family_nameError = document.getElementById('family_nameError');
     const first_nameError = document.getElementById('first_nameError');
     const birthdateError = document.getElementById('birthdateError');
@@ -109,8 +108,6 @@ function validateForm() {
     // エラーメッセージのクリア
     nameError.textContent = '';
     emailError.textContent = '';
-    passwordError.textContent = '';
-    password_confirmError.textContent = '';
     family_nameError.textContent = '';
     first_nameError.textContent = '';
     birthdateError.textContent = '';
@@ -131,10 +128,6 @@ function validateForm() {
         isValid = false;
     } else if (!emailPattern.test(email)) {
         emailError.textContent = '正しいメールアドレスを入力してください';
-        isValid = false;
-    }
-    if (password === '') {
-        passwordError.textContent = 'パスワードは入力必須です';
         isValid = false;
     }
     if (family_name === '') {

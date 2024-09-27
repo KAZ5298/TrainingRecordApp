@@ -3,12 +3,12 @@ package com.example.training_app.custom;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-import com.example.training_app.form.ProfileForm;
+import com.example.training_app.form.PasswordUpdateForm;
 
-public class UpdatePasswordMatchesValidator implements ConstraintValidator<UpdatePasswordMatches, ProfileForm> {
+public class UpdatePasswordMatchesValidator implements ConstraintValidator<UpdatePasswordMatches, PasswordUpdateForm> {
     
     @Override
-    public boolean isValid(ProfileForm form, ConstraintValidatorContext context) {
+    public boolean isValid(PasswordUpdateForm form, ConstraintValidatorContext context) {
         
         if (form.getNewPassword() != null && !form.getNewPassword().isEmpty()) {
             boolean isValid = form.getNewPassword().equals(form.getNewPasswordConfirm());

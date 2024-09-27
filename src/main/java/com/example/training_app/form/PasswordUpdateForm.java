@@ -10,8 +10,8 @@ import lombok.Data;
 @UpdatePasswordMatches
 public class PasswordUpdateForm {
     
-	private Long id;
-	
+    private Long id;
+    
     @NotBlank(message = "現パスワードは入力必須です")
     private String currentPassword;
     

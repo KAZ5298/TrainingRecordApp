@@ -14,10 +14,10 @@
                 <label for="name">ユーザー名</label>
                 <div class="d-flex align-items-center">
                     <input type="text" class="form-control" id="name" th:field="*{name}" disabled>
-                    <div class="text-danger" id="nameError"></div>
-                    <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
                     <button type="button" class="btn btn-primary edit-btn" onclick="enableEdit('name')">編集</button>
                 </div>
+                <div class="text-danger" id="nameError"></div>
+                <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
             </div>
             
             <!-- メールアドレス -->
@@ -25,10 +25,10 @@
                 <label for="email">メールアドレス</label>
                 <div class="d-flex align-items-center">
                     <input type="email" class="form-control" id="email" th:field="*{email}" disabled>
-                    <div class="text-danger" id="emailError"></div>
-                    <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
                     <button type="button" class="btn btn-primary edit-btn" onclick="enableEdit('email')">編集</button>
                 </div>
+                <div class="text-danger" id="emailError"></div>
+                <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
             </div>
             
             <!-- パスワード -->
@@ -46,10 +46,10 @@
                 <label for="family_name">姓</label>
                 <div class="d-flex align-items-center">
                     <input type="text" class="form-control" id="family_name" th:field="*{familyName}" disabled>
-                    <div class="text-danger" id="family_nameError"></div>
-                    <div class="text-danger" th:if="${#fields.hasErrors('familyName')}" th:errors="*{familyName}"></div>
                     <button type="button" class="btn btn-primary edit-btn" onclick="enableEdit('family_name')">編集</button>
                 </div>
+                <div class="text-danger" id="family_nameError"></div>
+                <div class="text-danger" th:if="${#fields.hasErrors('familyName')}" th:errors="*{familyName}"></div>
             </div>
             
             <!-- 名 -->
@@ -57,10 +57,10 @@
                 <label for="first_name">名</label>
                 <div class="d-flex align-items-center">
                     <input type="text" class="form-control" id="first_name" th:field="*{firstName}" disabled>
-                    <div class="text-danger" id="first_nameError"></div>
-                    <div class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
                     <button type="button" class="btn btn-primary edit-btn" onclick="enableEdit('first_name')">編集</button>
                 </div>
+                <div class="text-danger" id="first_nameError"></div>
+                <div class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
             </div>
             
             <!-- 生年月日 -->
@@ -68,10 +68,10 @@
                 <label for="birthdate">生年月日</label>
                 <div class="d-flex align-items-center">
                     <input type="date" class="form-control" id="birthdate" disabled>
-                    <div class="text-danger" id="birthdateError"></div>
-                    <div class="text-danger" th:if="${#fields.hasErrors('birthdate')}" th:errors="*{birthdate}"></div>
                     <button type="button" class="btn btn-primary edit-btn" onclick="enableEdit('birthdate')">編集</button>
                 </div>
+                <div class="text-danger" id="birthdateError"></div>
+                <div class="text-danger" th:if="${#fields.hasErrors('birthdate')}" th:errors="*{birthdate}"></div>
             </div>
             
             <!-- 年齢 -->
@@ -79,9 +79,9 @@
                 <label for="age">年齢（※生年月日を入力すると自動計算されます）</label>
                 <div class="d-flex align-items-center">
                     <input type="text" class="form-control" id="age" th:field="*{age}" readonly>
-                    <div class="text-danger" id="ageError"></div>
-                    <div class="text-danger" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
                 </div>
+                <div class="text-danger" id="ageError"></div>
+                <div class="text-danger" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
             </div>
             
             <!-- 体重 -->
@@ -89,10 +89,10 @@
                 <label for="weight">体重 (kg)</label>
                 <div class="d-flex align-items-center">
                     <input type="number" step="0.1" class="form-control" id="weight" th:field="*{weight}" disabled>
-                    <div class="text-danger" id="weightError"></div>
-                    <div class="text-danger" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
                     <button type="button" class="btn btn-primary edit-btn" onclick="enableEdit('weight')">編集</button>
                 </div>
+                <div class="text-danger" id="weightError"></div>
+                <div class="text-danger" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
             </div>
             
             <!-- 身長 -->
@@ -100,10 +100,10 @@
                 <label for="height">身長 (cm)</label>
                 <div class="d-flex align-items-center">
                     <input type="number" step="0.1" class="form-control" id="height" th:field="*{height}" disabled>
-                    <div class="text-danger" id="heightError"></div>
-                    <div class="text-danger" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
                     <button type="button" class="btn btn-primary edit-btn" onclick="enableEdit('height')">編集</button>
                 </div>
+                <div class="text-danger" id="heightError"></div>
+                <div class="text-danger" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
             </div>
             
             <!-- 性別 -->
@@ -116,24 +116,24 @@
                             <option th:value="${gender.key}" th:text="${gender.value}"></option>
                         </th:block>
                     </select>
-                    <div class="text-danger" id="genderError"></div>
-                    <div class="text-danger" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></div>
                     <button type="button" class="btn btn-primary edit-btn" onclick="enableEdit('gender')">編集</button>
                 </div>
+                <div class="text-danger" id="genderError"></div>
+                <div class="text-danger" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></div>
             </div>
             
             <!-- プロフィール画像 -->
             <div class="mb-3">
                 <label for="profile_image">プロフィール画像</label>
                 <div class="d-flex align-items-center">
-					<img th:src="@{${profileImage}}" alt="プロフィール画像" style="width: 100px; height: auto;">
+                    <img th:src="@{${profileImage}}" alt="プロフィール画像" style="width: 100px; height: auto;">
                     <input type="file" class="form-control" id="profile_image" th:field="*{profileImage}" disabled>
                     <button type="button" class="btn btn-primary edit-btn" onclick="enableEdit('profile_image')">編集</button>
                 </div>
             </div>
             
             <!-- 確認ボタン -->
-            <button type="submit" class="btn btn-primary" id="confirmBtn" disabled>確認</button>
+            <button type="button" class="btn btn-primary" onclick="validateForm()" id="confirmBtn" disabled>確認</button>
             <a th:href="@{/top}" class="btn btn-secondary">戻る</a>
         </form>
     </div>
@@ -156,7 +156,6 @@
                 <div class="modal-body">
                     <p><strong>ユーザー名:</strong> <span id="modalName"></span></p>
                     <p><strong>メールアドレス:</strong> <span id="modalEmail"></span></p>
-                    <p><strong>パスワード:</strong>セキュリティの観点から非表示にしています</p>
                     <p><strong>姓:</strong> <span id="modalFamilyName"></span></p>
                     <p><strong>名:</strong> <span id="modalFirstName"></span></p>
                     <p><strong>年齢:</strong> <span id="modalAge"></span> 歳</p>
@@ -171,7 +170,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">戻る</button>
-                    <button type="button" class="btn btn-primary" onclick="submitForm()">登録</button>
+                    <button type="button" class="btn btn-primary" onclick="submitForm()">更新</button>
                 </div>
             </div>
         </div>

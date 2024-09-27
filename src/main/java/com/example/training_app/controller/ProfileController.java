@@ -60,14 +60,18 @@ public class ProfileController {
         
         logger.info("フォームデータ: {}", profileForm);
         
+        logger.info("フォームデータ: {}", passwordUpdateForm);
+        
         return "profile/index";
     }
     
     @PostMapping("/profile/{id}")
     public String updateProfile(@ModelAttribute @Valid ProfileForm profileForm,
-    		BindingResult bindingResult, @PathVariable("id") Long id, Model model) {
-    	
-    	// エラー時
+            BindingResult bindingResult, @PathVariable("id") Long id, Model model) {
+        
+        User user = userService.getUserOne(id);
+        
+        // エラー時
         if (bindingResult.hasErrors()) {
             List<String> errorMessages = bindingResult.getAllErrors().stream()
                     .map(error -> error.getDefaultMessage())
@@ -77,22 +81,28 @@ public class ProfileController {
             
             model.addAttribute("genderMap", applicationService.getGenderMap());
             
+            PasswordUpdateForm passwordUpdateForm = new PasswordUpdateForm();
+            passwordUpdateForm.setId(user.getId());
+            model.addAttribute("passwordUpdateForm", passwordUpdateForm);
+            
+            logger.info("フォームデータ: {}", profileForm);
+            
             return "profile/index";
         }
         
-        User user = userService.getUserOne(id);
+        
         
         if (user != null) {
-        	user.setName(profileForm.getName());
-        	user.setEmail(profileForm.getEmail());
-        	user.setFamilyName(profileForm.getFamilyName());
-        	user.setFirstName(profileForm.getFirstName());
-        	user.setAge(profileForm.getAge());
-        	user.setWeight(profileForm.getWeight());
-        	user.setHeight(profileForm.getHeight());
-        	user.setGender(profileForm.getGender());
-        	
-        	userService.updateUser(user);
+            user.setName(profileForm.getName());
+            user.setEmail(profileForm.getEmail());
+            user.setFamilyName(profileForm.getFamilyName());
+            user.setFirstName(profileForm.getFirstName());
+            user.setAge(profileForm.getAge());
+            user.setWeight(profileForm.getWeight());
+            user.setHeight(profileForm.getHeight());
+            user.setGender(profileForm.getGender());
+            
+            userService.updateUser(user);
         }
         
         return "redirect:/top";

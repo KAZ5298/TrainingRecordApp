@@ -23,12 +23,6 @@ public class ProfileForm {
     @Email(message = "正しいメールアドレスを入力してください")
     private String email;
     
-    @NotBlank(message = "パスワードは入力必須です")
-    private String password;
-    
-    @NotBlank(message = "パスワード確認は入力必須です")
-    private String passwordConfirm;
-    
     @NotBlank(message = "姓は入力必須です")
     private String familyName;
     
@@ -55,10 +49,4 @@ public class ProfileForm {
     private Integer gender;
     
     private String profileImage;
-    
-    private String currentPassword;
-    
-    private String newPassword;
-    
-    private String newPasswordConfirm;
 }
