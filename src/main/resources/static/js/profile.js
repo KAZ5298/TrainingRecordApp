@@ -1,17 +1,3 @@
-// 指定されたフィールドの disabled 属性を解除
-function enableEdit(fieldId) {
-    const inputField = document.getElementById(fieldId);
-    inputField.disabled = false;
-    document.getElementById("confirmBtn").disabled = false;  // 確認ボタンを有効化
-}
-
-// 送信前に全てのdisabledを解除
-//document.getElementById("updateForm").addEventListener("submit", function() {
-//    document.querySelectorAll('input[disabled], select[disabled]').forEach(function(element) {
-//        element.disabled = false;
-//    });
-//});
-
 // 生年月日から年齢を計算
 document.getElementById('birthdate').addEventListener('change', function() {
     const birthdateValue = this.value;
@@ -187,6 +173,20 @@ document.getElementById('profileForm').onsubmit = function(event) {
         event.preventDefault(); // バリデーションに失敗した場合、送信を防ぐ
     }
 };
+
+// 指定されたフィールドの disabled 属性を解除
+function enableEdit(fieldId) {
+    const inputField = document.getElementById(fieldId);
+    inputField.disabled = false;
+    document.getElementById("confirmBtn").disabled = false;  // 確認ボタンを有効化
+}
+
+// 確認ボタン押下時に全てのdisabledを解除
+document.getElementById("confirmBtn").addEventListener("click", function() {
+    document.querySelectorAll('input[disabled], select[disabled]').forEach(function(element) {
+        element.disabled = false;
+    });
+});
 
 // フォームをサブミットする
 function submitForm() {

@@ -25,73 +25,71 @@ import com.example.training_app.service.UserService;
 
 @Controller
 public class ProfileController {
-    
+
     @Autowired
     private ApplicationService applicationService;
-    
+
     @Autowired
     private UserService userService;
-    
+
     @Autowired
     private ModelMapper modelMapper;
-    
+
     private static final Logger logger = LoggerFactory.getLogger(ProfileController.class);
-    
+
     @GetMapping("/profile/{id}")
     public String getProfile(Model model, @PathVariable("id") Long id) {
         model.addAttribute("genderMap", applicationService.getGenderMap());
-        
+
         User user = userService.getUserOne(id);
-        
+
         if (user == null) {
             return "redirect:/login";
         }
-        
+
         ProfileForm profileForm = modelMapper.map(user, ProfileForm.class);
-        
+
         model.addAttribute("profileForm", profileForm);
-        
+
         PasswordUpdateForm passwordUpdateForm = new PasswordUpdateForm();
         passwordUpdateForm.setId(user.getId());
         model.addAttribute("passwordUpdateForm", passwordUpdateForm);
-        
+
         // ヘッダーのプロフィール画像用
         model.addAttribute("profileImage", profileForm.getProfileImage());
-        
+
         logger.info("フォームデータ: {}", profileForm);
-        
+
         logger.info("フォームデータ: {}", passwordUpdateForm);
-        
+
         return "profile/index";
     }
-    
+
     @PostMapping("/profile/{id}")
     public String updateProfile(@ModelAttribute @Valid ProfileForm profileForm,
             BindingResult bindingResult, @PathVariable("id") Long id, Model model) {
-        
+
         User user = userService.getUserOne(id);
-        
+
         // エラー時
         if (bindingResult.hasErrors()) {
             List<String> errorMessages = bindingResult.getAllErrors().stream()
                     .map(error -> error.getDefaultMessage())
                     .collect(Collectors.toList());
-            
+
             model.addAttribute("errorMessages", errorMessages);
-            
+
             model.addAttribute("genderMap", applicationService.getGenderMap());
-            
+
             PasswordUpdateForm passwordUpdateForm = new PasswordUpdateForm();
             passwordUpdateForm.setId(user.getId());
             model.addAttribute("passwordUpdateForm", passwordUpdateForm);
-            
+
             logger.info("フォームデータ: {}", profileForm);
-            
+
             return "profile/index";
         }
-        
-        
-        
+
         if (user != null) {
             user.setName(profileForm.getName());
             user.setEmail(profileForm.getEmail());
@@ -101,11 +99,11 @@ public class ProfileController {
             user.setWeight(profileForm.getWeight());
             user.setHeight(profileForm.getHeight());
             user.setGender(profileForm.getGender());
-            
+
             userService.updateUser(user);
         }
-        
+
         return "redirect:/top";
     }
-    
+
 }
