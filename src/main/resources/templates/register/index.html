@@ -1,155 +1,158 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-    xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head th:replace="~{layout/common :: common_head('ユーザー登録', null)}">
 </head>
+
 <body>
-    <!-- ヘッダー -->
-    <header th:insert="~{layout/common :: common_header('ユーザー登録')}"></header>
-    
-    <div class="container mt-4">
-        <form id="registerForm" th:action="@{/register}" method="post" th:object="${userRegisterForm}"
-            enctype="multipart/form-data">
-            <div class="mb-3">
-                <label for="name">ユーザー名</label>
-                <input type="text" class="form-control" id="name" th:field="*{name}">
-                <span id="nameError" class="text-danger">
-                    <span id="frontendNameError"></span>
-                    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
-                </span>
-            </div>
-            <div class="mb-3">
-                <label for="email">メールアドレス</label>
-                <input type="email" class="form-control" id="email" th:field="*{email}">
-                <span id="emailError" class="text-danger">
-                    <span id="frontendEmailError"></span>
-                    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-                </span>
-            </div>
-            <div class="mb-3">
-                <label for="password">パスワード</label>
-                <input type="password" class="form-control" id="password" th:field="*{password}">
-                <span id="passwordError" class="text-danger">
-                    <span id="frontendPasswordError"></span>
-                    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-                </span>
-            </div>
-            <div class="mb-3">
-                <label for="password_confirm">パスワードの確認</label>
-                <input type="password" class="form-control" id="password_confirm" th:field="*{passwordConfirm}">
-                <span id="password_confirmError" class="text-danger">
-                    <span id="frontendPassword_confirmError"></span>
-                    <span th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}"></span>
-                </span>
-            </div>
-            <div class="mb-3">
-                <label for="family_name">姓</label>
-                <input type="text" class="form-control" id="family_name" th:field="*{familyName}">
-                <span id="family_nameError" class="text-danger">
-                    <span id="frontendFamily_nameError"></span>
-                    <span th:if="${#fields.hasErrors('familyName')}" th:errors="*{familyName}"></span>
-                </span>
-            </div>
-            <div class="mb-3">
-                <label for="first_name">名</label>
-                <input type="text" class="form-control" id="first_name" th:field="*{firstName}">
-                <span id="first_nameError" class="text-danger">
-                    <span id="frontendFirst_nameError"></span>
-                    <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
-                </span>
-            </div>
-            <div class="mb-3">
-                <label for="birthdate">生年月日</label>
-                <input type="date" class="form-control" id="birthdate" th:field="*{birthdate}">
-                <span id="birthdateError" class="text-danger">
-                    <span id="frontendBirthdateError"></span>
-                    <span th:if="${#fields.hasErrors('birthdate')}" th:errors="*{birthdate}"></span>
-                </span>
-            </div>
-            <div class="mb-3">
-                <label for="age">年齢（※生年月日を入力すると自動計算されます）</label>
-                <input type="text" class="form-control" id="age" name="age" th:field="*{age}" readonly>
-                <span id="ageError" class="text-danger">
-                    <span id="frontendAgeError"></span>
-                    <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
-                </span>
-            </div>
-            <div class="mb-3">
-                <label for="weight">体重 (kg)</label>
-                <input type="number" step="0.1" class="form-control" id="weight" th:field="*{weight}">
-                <span id="weightError" class="text-danger">
-                    <span id="frontendWeightError"></span>
-                    <span th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></span>
-                </span>
-            </div>
-            <div class="mb-3">
-                <label for="height">身長 (cm)</label>
-                <input type="number" step="0.1" class="form-control" id="height" th:field="*{height}">
-                <span id="heightError" class="text-danger">
-                    <span id="frontendHeightError"></span>
-                    <span th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></span>
-                </span>
-            </div>
-            <div class="mb-3">
-                <label for="gender">性別</label>
-                <select class="form-control" id="gender" th:field="*{gender}">
-                    <option value="">選択してください</option>
-                    <th:block th:each="gender : ${genderMap}">
-                        <option th:value="${gender.key}" th:text="${gender.value}"></option>
-                    </th:block>
-                </select>
-                <span id="genderError" class="text-danger">
-                    <span id="frontendGenderError"></span>
-                    <span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></span>
-                </span>
-            </div>
-            <div class="mb-3">
-                <label for="profile_image">プロフィール画像</label>
-                <input type="file" class="form-control" id="profile_image" th:field="*{profileImage}">
-            </div>
-            <!-- 確認ボタンにクリックイベントを追加 -->
-            <button type="button" class="btn btn-primary" onclick="validateForm()">確認</button>
-            <a th:href="@{/login}" class="btn btn-secondary">戻る</a>
-        </form>
-    </div>
-    
-    <!-- フッター -->
-    <footer th:insert="~{layout/common :: common_footer}"></footer>
-    
-    <script th:src="@{/webjars/popper.js/2.11.7/umd/popper.min.js}" defer></script>
-    <script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.min.js}" defer></script>
-    <script th:src="@{/js/register.js}" defer></script>
-    
-    <!-- モーダルウィンドウのHTML -->
-    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">入力内容確認</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p><strong>ユーザー名:</strong> <span id="modalName"></span></p>
-                    <p><strong>メールアドレス:</strong> <span id="modalEmail"></span></p>
-                    <p><strong>パスワード:</strong>セキュリティの観点から非表示にしています</p>
-                    <p><strong>姓:</strong> <span id="modalFamilyName"></span></p>
-                    <p><strong>名:</strong> <span id="modalFirstName"></span></p>
-                    <p><strong>年齢:</strong> <span id="modalAge"></span> 歳</p>
-                    <p><strong>体重:</strong> <span id="modalWeight"></span> kg</p>
-                    <p><strong>身長:</strong> <span id="modalHeight"></span> cm</p>
-                    <p><strong>性別:</strong> <span id="modalGender"></span></p>
-                    <div>
-                        <strong>プロフィール画像:</strong>
-                        <img id="modalProfileImage" src="" alt="プロフィール画像" style="max-width: 200px; height: auto; display: none;">
-                        <p id="modalProfileImageText"></p>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">戻る</button>
-                    <button type="button" class="btn btn-primary" onclick="submitForm()">登録</button>
-                </div>
-            </div>
-        </div>
-    </div>
+	<!-- ヘッダー -->
+	<header th:insert="~{layout/common :: common_header('ユーザー登録')}"></header>
+
+	<div class="container mt-4">
+		<form id="registerForm" th:action="@{/register}" method="post" th:object="${userRegisterForm}"
+			enctype="multipart/form-data">
+			<div class="mb-3">
+				<label for="name">ユーザー名</label>
+				<input type="text" class="form-control" id="name" th:field="*{name}">
+				<span id="nameError" class="text-danger">
+					<span id="frontendNameError"></span>
+					<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+				</span>
+			</div>
+			<div class="mb-3">
+				<label for="email">メールアドレス</label>
+				<input type="email" class="form-control" id="email" th:field="*{email}">
+				<span id="emailError" class="text-danger">
+					<span id="frontendEmailError"></span>
+					<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+				</span>
+			</div>
+			<div class="mb-3">
+				<label for="password">パスワード</label>
+				<input type="password" class="form-control" id="password" th:field="*{password}">
+				<span id="passwordError" class="text-danger">
+					<span id="frontendPasswordError"></span>
+					<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+				</span>
+			</div>
+			<div class="mb-3">
+				<label for="password_confirm">パスワードの確認</label>
+				<input type="password" class="form-control" id="password_confirm" th:field="*{passwordConfirm}">
+				<span id="password_confirmError" class="text-danger">
+					<span id="frontendPassword_confirmError"></span>
+					<span th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}"></span>
+				</span>
+			</div>
+			<div class="mb-3">
+				<label for="family_name">姓</label>
+				<input type="text" class="form-control" id="family_name" th:field="*{familyName}">
+				<span id="family_nameError" class="text-danger">
+					<span id="frontendFamily_nameError"></span>
+					<span th:if="${#fields.hasErrors('familyName')}" th:errors="*{familyName}"></span>
+				</span>
+			</div>
+			<div class="mb-3">
+				<label for="first_name">名</label>
+				<input type="text" class="form-control" id="first_name" th:field="*{firstName}">
+				<span id="first_nameError" class="text-danger">
+					<span id="frontendFirst_nameError"></span>
+					<span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+				</span>
+			</div>
+			<div class="mb-3">
+				<label for="birthdate">生年月日</label>
+				<input type="date" class="form-control" id="birthdate" th:field="*{birthdate}">
+				<span id="birthdateError" class="text-danger">
+					<span id="frontendBirthdateError"></span>
+					<span th:if="${#fields.hasErrors('birthdate')}" th:errors="*{birthdate}"></span>
+				</span>
+			</div>
+			<div class="mb-3">
+				<label for="age">年齢（※生年月日を入力すると自動計算されます）</label>
+				<input type="text" class="form-control" id="age" name="age" th:field="*{age}" readonly>
+				<span id="ageError" class="text-danger">
+					<span id="frontendAgeError"></span>
+					<span th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
+				</span>
+			</div>
+			<div class="mb-3">
+				<label for="weight">体重 (kg)</label>
+				<input type="number" step="0.1" class="form-control" id="weight" th:field="*{weight}">
+				<span id="weightError" class="text-danger">
+					<span id="frontendWeightError"></span>
+					<span th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></span>
+				</span>
+			</div>
+			<div class="mb-3">
+				<label for="height">身長 (cm)</label>
+				<input type="number" step="0.1" class="form-control" id="height" th:field="*{height}">
+				<span id="heightError" class="text-danger">
+					<span id="frontendHeightError"></span>
+					<span th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></span>
+				</span>
+			</div>
+			<div class="mb-3">
+				<label for="gender">性別</label>
+				<select class="form-control" id="gender" th:field="*{gender}">
+					<option value="">選択してください</option>
+					<th:block th:each="gender : ${genderMap}">
+						<option th:value="${gender.key}" th:text="${gender.value}"></option>
+					</th:block>
+				</select>
+				<span id="genderError" class="text-danger">
+					<span id="frontendGenderError"></span>
+					<span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></span>
+				</span>
+			</div>
+			<div class="mb-3">
+				<label for="profile_image">プロフィール画像</label>
+				<input type="file" class="form-control" id="profile_image" th:field="*{profileImage}">
+			</div>
+			<!-- 確認ボタンにクリックイベントを追加 -->
+			<button type="button" class="btn btn-primary" onclick="validateForm()">確認</button>
+			<a th:href="@{/login}" class="btn btn-secondary">戻る</a>
+		</form>
+	</div>
+
+	<!-- フッター -->
+	<footer th:insert="~{layout/common :: common_footer}"></footer>
+
+	<script th:src="@{/webjars/popper.js/2.11.7/umd/popper.min.js}" defer></script>
+	<script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.min.js}" defer></script>
+	<script th:src="@{/js/register.js}" defer></script>
+
+	<!-- モーダルウィンドウのHTML -->
+	<div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">入力内容確認</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<p><strong>ユーザー名:</strong> <span id="modalName"></span></p>
+					<p><strong>メールアドレス:</strong> <span id="modalEmail"></span></p>
+					<p><strong>パスワード:</strong>セキュリティの観点から非表示にしています</p>
+					<p><strong>姓:</strong> <span id="modalFamilyName"></span></p>
+					<p><strong>名:</strong> <span id="modalFirstName"></span></p>
+					<p><strong>年齢:</strong> <span id="modalAge"></span> 歳</p>
+					<p><strong>体重:</strong> <span id="modalWeight"></span> kg</p>
+					<p><strong>身長:</strong> <span id="modalHeight"></span> cm</p>
+					<p><strong>性別:</strong> <span id="modalGender"></span></p>
+					<div>
+						<strong>プロフィール画像:</strong>
+						<img id="modalProfileImage" src="" alt="プロフィール画像"
+							style="max-width: 200px; height: auto; display: none;">
+						<p id="modalProfileImageText"></p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">戻る</button>
+					<button type="button" class="btn btn-primary" onclick="submitForm()">登録</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
+
 </html>
